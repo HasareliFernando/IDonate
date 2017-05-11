@@ -3,46 +3,40 @@
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header"  ng-controller="GetMapController">
-    <form id="addAsDonor-form19" class="list"  >
-      <label class="item item-input addDonerName" id="addAsDonor_input30" name="Dname">
-        <span class="input-label">User Name</span>
-        <input placeholder="" type="text" >
-      </label>
-      <label class="item item-input addDonerNIC" id="addAsDonor_input31" name="Dnic">
+    <form id="addAsDonor_form19" class="list"  >
+     
+      <label class="item item-input addDonerNIC"  name="Dnic">
         <span class="input-label">NIC</span>
         <span id="response"></span>
-        <input placeholder="" type="text" ng-model="addAsDonor_input31">
+        <input placeholder="" type="text" id="addAsDonorInput31" ng-model="addAsDonorInput31">
       </label>
-      <label class="item item-select addDonerGender" id="addAsDonor-select2" name="Dgender">
+      <label class="item item-select addDonerGender"  name="Dgender">
         <span class="input-label">Gender</span>
-        <select>
-          <option>Male</option>
-          <option>Female</option>
+        <select id="addAsDonor_select2">
+          <option value="Male" selected="">Male</option>
+          <option value="Female">Female</option>
         </select>
       </label>
-      <label class="item item-select addDonerBloodgrp" id="addAsDonor-select3" name="Dgroup">
+      <label class="item item-select addDonerBloodgrp"  name="Dgroup">
         <span class="input-label">Blood Group</span>
-        <select>
-          <option>A+</option>
-          <option>B+</option>
-          <option>O+</option>
-          <option>AB+</option>
-          <option>A-</option>
-          <option>B-</option>
-          <option>O-</option>
-          <option>AB-</option>
+        <select id="addAsDonor_select3">
+          <option value="A+" selected>A+</option>
+          <option value="B+">B+</option>
+          <option value="O+">O+</option>
+          <option value="AB+">AB+</option>
+          <option value="A-">A-</option>
+          <option value="B-">B-</option>
+          <option value="O-">O-</option>
+          <option value="AB-">AB-</option>
         </select>
       </label>
-      <label class="item item-input addDonerLocation" id="addAsDonor-input33" name="Dlocation" >
-        <span class="input-label">Location </span>
-        {{c}}
-      </label>
+      
 
     </form>
     <div id="getmap" data-tab-disabled="true"></div>
     <div id="addAsDonor-button-bar5" class="button-bar addDonerButton">
       <a ui-sref="iDonate2" id="addAsDonor-button26" class="button button-positive  button-block addDonerButtonCan">Cancel</a>
-      <a ui-sref="addAsDonor2" id="addAsDonor-button29" class="button button-positive  button-block addDonerButtonNext">Next</a>
+      <a  id="addAsDonor-button29" class="button button-positive  button-block addDonerButtonNext">Next</a>
     </div>
 
   </ion-content>

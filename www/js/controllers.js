@@ -85,21 +85,23 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 	$('#addAsDonor-button29').click(function(){
-			var addAsDonor_input31=$scope.addAsDonor_input31;
-			var input31=$('#addAsDonor_input31').val();
-			var datastring=addAsDonor_input31;
-			if(input31 == ''){
-				$('#response').html('Please enter your id');
+			//var addAsDonorInput31=$scope.addAsDonorInput31;
+			var nic=$('#addAsDonorInput31').val();
+      var gender=$('#addAsDonor_select2').val();
+      var blood=$('#addAsDonor_select3').val();
+			//var data="addAsDonorInput31="+addAsDonorInput31;
+			if(nic == '' || gender==''|| blood==''){
+				$('#response').html('plz');
 			}
 			else{
 				$.ajax({
           type:"POST",
           url:"http://127.0.0.1/IDonate/server/addAsDonor.php",
-          data:datastring,
+          data:{addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood},
           cache:false,
           success:function(result){
             $('#response').html(result);
-            var input31=$('#addAsDonor-input31').val("");
+            var nic=$('#addAsDonorInput31').val("");
           }
         })
 			}
