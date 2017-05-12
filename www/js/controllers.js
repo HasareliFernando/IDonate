@@ -40,10 +40,67 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('bloodRequestCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('bloodRequestCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$state) {
+
+      var lat=null;
+      var lng=null;
+      var mapCanvas = document.getElementById("map");
+      var myCenter=new google.maps.LatLng(7.20,80.6);
+      var mapOptions = {center: myCenter, zoom: 7};
+      var map = new google.maps.Map(mapCanvas, mapOptions);
+      google.maps.event.addListener(map, 'click', function(event) {
+        placeMarker(map, event.latLng);
+      });
+    
+
+    function placeMarker(map, location) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+      lat=location.lat();
+      lng=location.lng();
+      var infowindow = new google.maps.InfoWindow({
+        content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+      });
+      infowindow.open(map,marker);
+      $('#location').html('Latitude: '+lat+'     ,      '+'Longitude:'+lng);
+    }
+
+    $('#bloodRequest-button15').click(function(){
+      //var addAsDonorInput31=$scope.addAsDonorInput31;
+      
+      var group=$('#bloodRequest_select1').val();
+      var type=$('#bloodRequest_select2').val();
+      
+      
+     
+      //var data="addAsDonorInput31="+addAsDonorInput31;
+      if(group == '' || type==''|| lat==null ||lng==null ){
+        alert('Required');
+      }
+      else{
+        
+        $.ajax({
+          type:"POST",
+          url:"http://127.0.0.1/IDonate/server/bloodRequest.php",
+          data:{bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
+          cache:false,
+          success:function(result){
+            alert(result);
+            if(result=="Your request perfectly send"){ 
+              $state.go('iDonate2');
+            }else{ $state.go('bloodRequest');}
+
+           
+          }
+        })
+      }
+    
+  });
 
 
 }])

@@ -2,44 +2,46 @@
   <ion-nav-buttons side="right" class="has-header">
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
-  <ion-content padding="true" class="has-header">
+  <ion-content padding="true" class="has-header" >
     <form id="bloodRequest-form5" class="list reqform">
       <label class="item item-input formid" id="bloodRequest-input6" name="Rid">
         <span class="input-label">User ID</span>
         <input placeholder="" type="text">
       </label>
-      <label class="item item-input formloc" id="bloodRequest-input7" name="Rlocation">
-        <span class="input-label">Location</span>
-        <input placeholder="" type="text">
-      </label>
+      
      
-      <label class="item item-select addDonerBloodgrp" id="bloodRequest-select1" name="Dgroup">
+      <label class="item item-select addDonerBloodgrp"  name="Dgroup">
         <span class="input-label">Blood Group</span>
-        <select>
-          <option>A+</option>
-          <option>B+</option>
-          <option>O+</option>
-          <option>AB+</option>
-          <option>A-</option>
-          <option>B-</option>
-          <option>O-</option>
-          <option>AB-</option>
+        <select id="bloodRequest_select1">
+          <option value="A+" selected>A+</option>
+          <option value="B+" >B+</option>
+          <option value="O+">O+</option>
+          <option value="AB+">AB+</option>
+          <option value="A-">A-</option>
+          <option value="B-">B-</option>
+          <option value="O-">O-</option>
+          <option value="AB-">AB-</option>
         </select>
       </label>
-      <label class="item item-select addDonerBloodgrp" id="bloodRequest-select2" name="Dtype">
+      <label class="item item-select addDonerBloodgrp"  name="Dtype">
         <span class="input-label">Blood Type</span>
-        <select>
-          <option>Blood(whole blood)</option>
-          <option>Platelets</option>
-          <option>Plasma</option>
-          <option>Power Red</option>
+        <select id="bloodRequest_select2">
+          <option value="Blood(whole blood)" selected>Blood(whole blood)</option>
+          <option value="Platelets">Platelets</option>
+          <option value="Plasma">Plasma</option>
+          <option value="Power Red">Power Red</option>
         </select>
       </label>
-
+      <label class="item item-input formloc" id="bloodRequest-input7" name="Rlocation" >
+        <span class="input-label">Location</span>
+        <span id="location" ></span>
+      </label>
+        <div id="map" style="width:90%;height:500px;margin-left: 10px;"></div>
       <div id="bloodRequest-button-bar3" class="button-bar reqbutton">
         <a ui-sref="iDonate2" id="bloodRequest-button14" class="button button-assertive button-block reqbuttoncancel">Cancel</a>
         <button id="bloodRequest-button15" class="button button-assertive button-block reqbuttonsend">Send</button>
       </div>
     </form>
+
   </ion-content>
 </ion-view>
