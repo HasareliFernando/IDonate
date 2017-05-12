@@ -77,7 +77,7 @@ angular.module('app.routes', [])
   })
 
   .state('addAsDonor2', {
-    url: '/page14',
+    url: '/page14/:term',
     templateUrl: 'templates/addAsDonor2.html',
     controller: 'addAsDonor2Ctrl'
   })

@@ -3,12 +3,14 @@
 	$input1=$_POST['addAsDonorInput31'];
 	$input2=$_POST['addAsDonor_select2'];
 	$input3=$_POST['addAsDonor_select3'];
+	$input4=$_POST['Location'];
+	$input5=$_POST['Location2'];
 	
-	$sql="INSERT INTO donor VALUES('donor2','$input1','$input2','$input3')";
+	$sql="INSERT INTO donor VALUES('donor3','$input1','$input2','$input3','$input4','$input5',null,null)";
 	if($conn->query($sql)===TRUE){
-		echo $input1;
+		echo 'Next';
 	}
 	else{
-		echo'Fail';
+		echo'you already done';
 	}
 	?>

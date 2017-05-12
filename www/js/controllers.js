@@ -80,42 +80,123 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('addAsDonorCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addAsDonorCtrl', ['$scope', '$stateParams', '$cordovaGeolocation','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+
+
+
+function ($scope, $stateParams,$cordovaGeolocation,$state) {
+  var options={timeout:1000, enableHighAccuracy: false};
+  var geocoder;
+  var lat;
+  var lng;
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+  var latlong=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+  lat=position.coords.latitude;
+  lng=position.coords.longitude;
+  codeLatLng(lat, lng);
+   })
+   function codeLatLng(lat, lng) {
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results)
+        if (results[1]) {
+         //formatted address
+         $('#location').html(results[0].formatted_address)
+        //find country name
+             for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                    //this is the object you are looking for
+                    city= results[0].address_components[i];
+                    break;
+                }
+            }
+        }
+        
+
+
+        } else {
+         $('#location').html("No results found");
+        }
+      } else {
+        $('#location').html("Geocoder failed due to: " + status);
+      }
+    });
+  }
+   
+
+ 
+
 	$('#addAsDonor-button29').click(function(){
 			//var addAsDonorInput31=$scope.addAsDonorInput31;
+      
 			var nic=$('#addAsDonorInput31').val();
       var gender=$('#addAsDonor_select2').val();
       var blood=$('#addAsDonor_select3').val();
+      myRegExp = new RegExp(/^[0-9]{9}[vVxX]$/);
+      if(!(myRegExp.test(nic)))
+      {
+          alert("Invalid NIC ");
+      }else{
+     
 			//var data="addAsDonorInput31="+addAsDonorInput31;
-			if(nic == '' || gender==''|| blood==''){
-				$('#response').html('plz');
+			if(nic == '' || gender==''|| blood=='' ){
+				$('#response').html('Required');
 			}
 			else{
+        
 				$.ajax({
           type:"POST",
           url:"http://127.0.0.1/IDonate/server/addAsDonor.php",
-          data:{addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood},
+          data:{addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood,Location:lat,Location2:lng},
           cache:false,
           success:function(result){
-            $('#response').html(result);
-            var nic=$('#addAsDonorInput31').val("");
+            alert(result);
+            if(result=="Next"){ 
+              $state.go('addAsDonor2',{'term':nic});
+            }else{ $state.go('iDonate2');}
+
+           
           }
         })
 			}
+    }
 	});
 
 
 
 }])
    
-.controller('addAsDonor2Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addAsDonor2Ctrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams,$state) {
+  $('#addAsDonor2-button31').click(function(){
+      //var addAsDonorInput31=$scope.addAsDonorInput31;
+      
+      var date=$('#addAsDonor2_input35').val();
+      var no=$('#addAsDonor2_input36').val();
+      var nic=$stateParams.term;
+     
+        
+        $.ajax({
+          type:"POST",
+          url:"http://127.0.0.1/IDonate/server/addAsDonor2.php",
+          data:{addAsDonor2_input35:date,addAsDonor2_input36:no,Nic:nic},
+          cache:false,
+          success:function(result){
+            alert(result);
+            $state.go('iDonate2');
+          }
+        })
+    
+  });
 
 }])
    
