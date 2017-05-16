@@ -1,5 +1,18 @@
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "../www/lib/ionic/scss";
+$stable: #FF1930;
+.barclass {
+	background: #2A1C26!important;
+}
+
+ion-view,.pane,.view {
+	background-color: #FEFDFE;
+}
+
+body {
+	color: #000000;
+}
+
 .remove {
 	width: 50% !important;
 }
