@@ -4,7 +4,27 @@ angular.module('app.controllers', ['ngCordova'])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+ 
+    $('#LogIn-button4').click(function(){
+        var user = $('#input_name').val();
+        var pass = $('#input_tel').val();
+        if(user == null || pass == null){
+          $('#response').html('Please fill the boxes');
+        }
+        else{
+          $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1/IDonate/server/login.php",
+            data: {input_name:name,input_tel:tel},
+            cache: false,
+            success: function(result){
+              alert('success');
+            }
+          });
+        }
 
+
+    });
 
 }])
    
@@ -44,7 +64,7 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$state) {
-
+  
       var lat=null;
       var lng=null;
       var mapCanvas = document.getElementById("map");
@@ -53,6 +73,7 @@ function ($scope, $stateParams,$state) {
       var map = new google.maps.Map(mapCanvas, mapOptions);
       google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(map, event.latLng);
+        
       });
     
 
@@ -67,8 +88,40 @@ function ($scope, $stateParams,$state) {
         content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
       });
       infowindow.open(map,marker);
-      $('#location').html('Latitude: '+lat+'     ,      '+'Longitude:'+lng);
+      var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(lat, lng);
+        geocoder.geocode({'latLng': latlng}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+          console.log(results)
+            if (results[1]) {
+             //formatted address
+             $('#location').html(results[0].formatted_address)
+            //find country name
+                 for (var i=0; i<results[0].address_components.length; i++) {
+                for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+                //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                    if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                        //this is the object you are looking for
+                        city= results[0].address_components[i];
+                        break;
+                    }
+                }
+            }
+            
+
+
+            } else {
+             $('#location').html("No results found");
+            }
+          } else {
+            $('#location').html("Geocoder failed due to: " + status);
+          }
+        });
+
     }
+   
+
 
     $('#bloodRequest-button15').click(function(){
       //var addAsDonorInput31=$scope.addAsDonorInput31;
@@ -80,7 +133,7 @@ function ($scope, $stateParams,$state) {
      
       //var data="addAsDonorInput31="+addAsDonorInput31;
       if(group == '' || type==''|| lat==null ||lng==null ){
-        alert('Required');
+        alert('Location Required');
       }
       else{
         
@@ -148,11 +201,35 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
   var geocoder;
   var lat;
   var lng;
+  $scope.locationmodel="GeoLocation";
+  
+  $scope.locationChange = function (locationmodel) {
+
+    if(locationmodel=="Set Location"){
+      $('#location').html("Please, Select your location");
+      var mapCanvas = document.getElementById("getmap");
+      var myCenter=new google.maps.LatLng(7.20,80.6);
+      var mapOptions = {center: myCenter, zoom: 7};
+      var map = new google.maps.Map(mapCanvas, mapOptions);
+      google.maps.event.addListener(map, 'click', function(event) {
+            placeMarker(map, event.latLng);
+        
+      });
+    
+
+    }else{
+      codeLatLng(lat,lng);
+    }
+  
+    }; 
+
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
   var latlong=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
   lat=position.coords.latitude;
   lng=position.coords.longitude;
-  codeLatLng(lat, lng);
+  codeLatLng(lat,lng);
+  
+  
    })
    function codeLatLng(lat, lng) {
     var geocoder = new google.maps.Geocoder();
@@ -186,8 +263,51 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
       }
     });
   }
-   
+ 
+  
+    function placeMarker(map, location) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+      lat=location.lat();
+      lng=location.lng();
+      var infowindow = new google.maps.InfoWindow({
+        content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+      });
+      infowindow.open(map,marker);
+      var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(lat, lng);
+        geocoder.geocode({'latLng': latlng}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+          console.log(results)
+            if (results[1]) {
+             //formatted address
+             $('#location').html(results[0].formatted_address)
+            //find country name
+                 for (var i=0; i<results[0].address_components.length; i++) {
+                for (var b=0;b<results[0].address_components[i].types.length;b++) {
 
+                //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                    if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                        //this is the object you are looking for
+                        city= results[0].address_components[i];
+                        break;
+                    }
+                }
+            }
+            
+
+
+            } else {
+             $('#location').html("No results found");
+            }
+          } else {
+            $('#location').html("Geocoder failed due to: " + status);
+          }
+        });
+
+    }
  
 
 	$('#addAsDonor-button29').click(function(){
@@ -249,7 +369,10 @@ function ($scope, $stateParams,$state) {
           cache:false,
           success:function(result){
             alert(result);
-            $state.go('iDonate2');
+            if(result=="Done"){$state.go('iDonate2');}
+            else{$state.go('addAsDonor2');}
+            
+            
           }
         })
     
@@ -377,10 +500,17 @@ $cordovaGeolocation.getCurrentPosition(options).then(function(position){
   
 )
 }])
-.controller('notificationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('NotificationController', ['$scope', '$stateParams','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function($scope, $http) {
+
+  $http.get('http://127.0.0.1/IDonate/server/bloodRequest.php').success(
+    function(response){
+      $scope.items=response;
+    });
+
+  
 
 
 }])

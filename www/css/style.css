@@ -4,7 +4,7 @@ font-size: ;
 color : green;
 }
 .barclass{
-  background: #ff1930!important;
+  background: #D21B1B!important;
   
 }
 .button ion-android-clipboard {
@@ -25,4 +25,10 @@ color : green;
     width: 45.7vw;
     height: 100px; //some custom height
     margin: 2px;
+}
+.Homepage{
+	background: url("../img/back.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
 }

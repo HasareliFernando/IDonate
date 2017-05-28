@@ -7,8 +7,8 @@
       </ion-list>
       <div id="notification-container2">
         <ion-list id="notification-list4">
-          <ion-item class="item-icon-left assertive" id="notification-list-item10">
-            <i class="icon ion-waterdrop"></i>You have a blood request by -----</ion-item>
+          <ion-item class="item-icon-left assertive" id="notification-list-item10" ng-repeat="item in items.info">
+            <i class="icon ion-waterdrop"></i>You have a blood request by  {{item.requester_id}}</ion-item>
         </ion-list>
       </div>
     </div>
@@ -20,5 +20,6 @@
     </div>
     <div class="spacer" style="width: 300px; height: 74px;"></div>
     <button id="notification-button1" class="button button-assertive  button-block">See All </button>
+    
   </ion-content>
 </ion-view>

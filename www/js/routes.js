@@ -117,26 +117,26 @@ angular.module('app.routes', [])
     templateUrl: 'templates/editProfile.html',
     controller: 'editProfileCtrl'
   })
-        .state('notification', {
-    url: 'notification',
+  .state('notification', {
+    url: '/notification',
     templateUrl: 'templates/notification.html',
-    controller: 'notificationCtrl'
+    controller: 'NotificationController'
   })
 
   .state('contactDonor', {
-    url: 'contactDonor',
+    url: '/contactDonor',
     templateUrl: 'templates/contactDonor.html',
     controller: 'contactDonorCtrl'
   })
 
   .state('bloodRequestnot', {
-    url: 'bloodRequestnot',
+    url: '/bloodRequestnot',
     templateUrl: 'templates/bloodRequestnot.html',
     controller: 'bloodRequestnotCtrl'
   })
 
   .state('verifiedStatus', {
-    url: 'verifiedStatus',
+    url: '/verifiedStatus',
     templateUrl: 'templates/verifiedStatus.html',
     controller: 'verifiedStatusCtrl'
   })

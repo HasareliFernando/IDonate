@@ -6,7 +6,7 @@
 	$input4=$_POST['Location'];
 	$input5=$_POST['Location2'];
 	
-	$sql="INSERT INTO donor VALUES('donor3','$input1','$input2','$input3','$input4','$input5',null,null)";
+	$sql="INSERT INTO donor VALUES('donor44','$input1','$input2','$input3','$input4','$input5',null,null,1)";
 	if($conn->query($sql)===TRUE){
 		echo 'Next';
 	}

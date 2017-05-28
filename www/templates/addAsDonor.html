@@ -19,7 +19,7 @@
       </label>
       <label class="item item-select addDonerBloodgrp"  name="Dgroup">
         <span class="input-label">Blood Group</span>
-        <select id="addAsDonor_select3">
+        <select id="addAsDonor_select3"  >
           <option value="A+" selected>A+</option>
           <option value="B+">B+</option>
           <option value="O+">O+</option>
@@ -30,10 +30,15 @@
           <option value="AB-">AB-</option>
         </select>
       </label>
-      <label class="item item-input "  name="loca">
+      <label class="item item-select "  name="loca">
         <span class="input-label">Location</span>
-        <span id="location"></span>
+        <select  id="lactionselection" ng-model="locationmodel" ng-change="locationChange(locationmodel)" required>
+          <option >GeoLocation</option>
+          <option >Set Location</option>
+          </select>
       </label>
+      <label class="item item-text "><span id="location"></span></label>
+      
 
     </form>
     <div id="getmap" data-tab-disabled="true"></div>
