@@ -1,17 +1,21 @@
 <ion-view title="Notification" id="notification" style="background-color:#FFFFFF;">
   <ion-content padding="true" class="has-header">
-    <div id="notification-container1">
+    <div id="notification-container1" ng-repeat="accs in acc.info | orderBy: 'time'">
       <ion-list id="notification-list1">
         <ion-item class="item-icon-left positive" id="notification-list-item3">
-          <i class="icon ion-waterdrop"></i>Your Request is accepted by _____</ion-item>
+          <i class="icon ion-waterdrop"></i>Your Request is accepted by {{accs.requester_id}}</ion-item>
       </ion-list>
-      <div id="notification-container2">
-        <ion-list id="notification-list4">
-          <ion-item class="item-icon-left assertive" id="notification-list-item10" ng-repeat="item in items.info">
-            <i class="icon ion-waterdrop"></i>You have a blood request by  {{item.requester_id}}</ion-item>
-        </ion-list>
       </div>
-    </div>
+      <div id="notification-container2" ng-repeat="item in items.info | orderBy: 'time'">
+      <a ui-sref="bloodRequestnot({term: item.No})"  >
+        <ion-list id="notification-list4">
+          <ion-item class="item-icon-left assertive" id="notification-list-item10" >
+            <i class="icon ion-waterdrop"></i>You have a blood request by  {{item.requester_id}}
+            </ion-item>
+        </ion-list>
+        </a>
+      </div>
+    
     <div id="notification-container3">
       <ion-list id="notification-list6">
         <ion-item class="item-icon-left balanced" id="notification-list-item17">

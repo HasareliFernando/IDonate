@@ -39,7 +39,7 @@
 				
 			}
 		}foreach ($donor_array as $value) {
-			echo $reqid;
+			echo $date;
 			$req="INSERT INTO notification(req_id,user_id, requester_id, blood_group, latitude, longtitute, date, time, approve) VALUES ('$reqid','$value','donor1','$input1','$input3','$input4','$date','$time',0)";
 			if($conn->query($req)===TRUE){
 				echo "send";
@@ -50,14 +50,11 @@
 			}
 
 		}
-		$result[]=array('user_id'=>$donor_array,'requester_id'=>'donor1','blood_group'=>$input1,'latitude'=>$input3,'longitute'=>$input4);
-		$json=array('status'=>1,'info'=>$result);
+		
 	}
 	else{
-		$json=array('status'=>0,'msg'=>'Fail');
+		
 		echo'Sending Fail';
 	}
-	@mysql_close($conn);
-	header('Content-type:application/json');
-	echo json_encode($json);
+	
 	?>

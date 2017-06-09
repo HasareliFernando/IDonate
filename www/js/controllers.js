@@ -40,7 +40,7 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-
+   
 
 }])
    
@@ -503,12 +503,24 @@ $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 .controller('NotificationController', ['$scope', '$stateParams','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function($scope, $http) {
+function($scope,$stateParams,$http) {
+      
+     
+      var user_id=$stateParams.term;
+      var url="http://127.0.0.1/IDonate/server/getNotification.php?user="+user_id;
+      var url2="http://127.0.0.1/IDonate/server/getNotification2.php?user="+user_id;
+      
+      
+    $http.get(url).success(
+      function(response){
+        $scope.items=response;
+      });
 
-  $http.get('http://127.0.0.1/IDonate/server/bloodRequest.php').success(
-    function(response){
-      $scope.items=response;
-    });
+     $http.get(url2).success(
+      function(response2){
+        $scope.acc=response;
+      });
+
 
   
 
@@ -523,10 +535,106 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('bloodRequestnotCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('bloodRequestnotCtrl', ['$scope', '$stateParams', '$http','$state', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
+    var user="";
+    var No=$stateParams.term;
+    var url="http://127.0.0.1/IDonate/server/notification.php?no="+No;
+            $http.get(url).success(
+            function(response){
+             $scope.items=response;
+              var lat = response.info[0].lat;
+              var long= response.info[0].long;
+              user= response.info[0].user;
+              var point={lat:Number(lat), lng:Number(long) };
+              
+              // Create a map object and specify the DOM element for display.
+              var mapOption = new google.maps.Map(document.getElementById('map'), {
+                center: point,
+                scrollwheel: false,
+                zoom: 10
+              });
+              // Create a marker and set its position.
+              var marker = new google.maps.Marker({
+                map: mapOption,
+                position: point,
+                title: 'Patient is here'
+              });
+             
+              $scope.map=new google.maps.Map(document.getElementById("map"),mapOption);
+              var geocoder = new google.maps.Geocoder();
+                  var latlng = new google.maps.LatLng(Number(lat), Number(long));
+                  geocoder.geocode({'latLng': latlng}, function(results, status) {
+                      if (status == google.maps.GeocoderStatus.OK) {
+                      console.log(results)
+                        if (results[1]) {
+                         //formatted address
+                         $('#location').html(results[0].formatted_address)
+                        //find country name
+                             for (var i=0; i<results[0].address_components.length; i++) {
+                            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+                            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                                    //this is the object you are looking for
+                                    city= results[0].address_components[i];
+                                    break;
+                                }
+                            }
+                        }
+                        
+
+
+                        } else {
+                         $('#location').html("No results found");
+                        }
+                      } else {
+                        $('#location').html("Geocoder failed due to: " + status);
+                      }
+                    });
+
+            } )
+                  
+
+             $('#bloodRequestnot-button17').click(function(){
+              $state.go('notification',{'term':user});
+             })
+
+
+
+
+             $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Confirm',
+               template: 'Are you sure you want to accept this?'
+             });
+
+             confirmPopup.then(function(res) {
+               if(res) {
+
+                      $.ajax({
+                        type:"POST",
+                        url:"http://127.0.0.1/IDonate/server/accept.php",
+                        data:{no:No},
+                        cache:false,
+                        success:function(result){
+                          if(result=="Done"){$state.go('notification',{'term':user}, { reload: true });}
+                          else{$state.go('bloodRequestnot',{'term':No});}
+                          
+                          
+                        }
+                      })
+                              
+                 
+               } else {
+                 console.log('You are not sure');
+               }
+             });
+           };  
+
+            
 
 
 }])

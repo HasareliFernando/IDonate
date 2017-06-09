@@ -1,13 +1,15 @@
-<ion-view title="Blood Request" id="bloodRequestnot">
+<ion-view title="Blood Request" id="bloodRequestnot" >
   <ion-content padding="true" class="has-header">
     <ion-list id="bloodRequestnot-list5">
-      <ion-item id="bloodRequestnot-list-item14">Location</ion-item>
-      <ion-item id="bloodRequestnot-list-item15">Requested ID</ion-item>
+ 
+      <ion-item  ng-repeat="item in items.info" id="bloodRequestnot-list-item15">Requested ID : <span style="color: blue;"> {{item.requester_id}}</span></ion-item>
+      <ion-item ng-repeat="item in items.info" id="bloodRequestnot-list-item14">Location  :<span style="color: blue" id="location"></span></ion-item>
+      <div id="map" data-tab-disabled="true" style="width: 300px; height: 259px;"></div>
     </ion-list>
-    <div class="spacer" style="width: 300px; height: 259px;"></div>
+    <div class="spacer" style=" height: 20px;"></div>
     <div id="bloodRequestnot-button-bar4" class="button-bar">
       <button id="bloodRequestnot-button17" class="button button-dark  button-block">Cancel</button>
-      <button id="bloodRequestnot-button18" class="button button-assertive  button-block">Accept</button>
+      <button id="bloodRequestnot-button18" ng-click="showConfirm()" class="button button-assertive  button-block">Accept</button>
     </div>
   </ion-content>
 </ion-view>

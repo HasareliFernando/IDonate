@@ -118,7 +118,7 @@ angular.module('app.routes', [])
     controller: 'editProfileCtrl'
   })
   .state('notification', {
-    url: '/notification',
+    url: '/notification/:term',
     templateUrl: 'templates/notification.html',
     controller: 'NotificationController'
   })
@@ -130,7 +130,7 @@ angular.module('app.routes', [])
   })
 
   .state('bloodRequestnot', {
-    url: '/bloodRequestnot',
+    url: '/bloodRequestnot/:term',
     templateUrl: 'templates/bloodRequestnot.html',
     controller: 'bloodRequestnotCtrl'
   })
