@@ -142,7 +142,7 @@ angular.module('app.routes', [])
   })
 
   .state('canDonate', {
-    url: '/candonate/:blood',
+    url: '/candonate',
     templateUrl: 'templates/candonate.html',
     controller: 'candonateCtrl'
   })
