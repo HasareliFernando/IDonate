@@ -1,10 +1,10 @@
 angular.module('app.controllers', ['ngCordova'])
-  
+
 .controller('LogInCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
- 
+
     $('#LogIn-button4').click(function(){
         var user = $('#input_name').val();
         var pass = $('#input_tel').val();
@@ -27,7 +27,7 @@ function ($scope, $stateParams) {
     });
 
 }])
-   
+
 .controller('iDonateCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -35,15 +35,15 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('iDonate2Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-   
+
 
 }])
-   
+
 .controller('settingsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -51,7 +51,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('timelineCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -59,12 +59,12 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('bloodRequestCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$state) {
-  
+
       var lat=null;
       var lng=null;
       var mapCanvas = document.getElementById("map");
@@ -73,9 +73,9 @@ function ($scope, $stateParams,$state) {
       var map = new google.maps.Map(mapCanvas, mapOptions);
       google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(map, event.latLng);
-        
+
       });
-    
+
 
     function placeMarker(map, location) {
       var marker = new google.maps.Marker({
@@ -108,7 +108,7 @@ function ($scope, $stateParams,$state) {
                     }
                 }
             }
-            
+
 
 
             } else {
@@ -120,23 +120,23 @@ function ($scope, $stateParams,$state) {
         });
 
     }
-   
+
 
 
     $('#bloodRequest-button15').click(function(){
       //var addAsDonorInput31=$scope.addAsDonorInput31;
-      
+
       var group=$('#bloodRequest_select1').val();
       var type=$('#bloodRequest_select2').val();
-      
-      
-     
+
+
+
       //var data="addAsDonorInput31="+addAsDonorInput31;
       if(group == '' || type==''|| lat==null ||lng==null ){
         alert('Location Required');
       }
       else{
-        
+
         $.ajax({
           type:"POST",
           url:"http://127.0.0.1/IDonate/server/bloodRequest.php",
@@ -144,20 +144,20 @@ function ($scope, $stateParams,$state) {
           cache:false,
           success:function(result){
             alert(result);
-            if(result=="Your request perfectly send"){ 
+            if(result=="Your request perfectly send"){
               $state.go('iDonate2');
             }else{ $state.go('bloodRequest');}
 
-           
+
           }
         })
       }
-    
+
   });
 
 
 }])
-   
+
 .controller('addPostCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -165,7 +165,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('searchBloodBankCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -173,7 +173,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('bloodCompatibilityCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -181,7 +181,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('reportUserCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -189,7 +189,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('addAsDonorCtrl', ['$scope', '$stateParams', '$cordovaGeolocation','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -202,7 +202,7 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
   var lat;
   var lng;
   $scope.locationmodel="GeoLocation";
-  
+
   $scope.locationChange = function (locationmodel) {
 
     if(locationmodel=="Set Location"){
@@ -213,23 +213,23 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
       var map = new google.maps.Map(mapCanvas, mapOptions);
       google.maps.event.addListener(map, 'click', function(event) {
             placeMarker(map, event.latLng);
-        
+
       });
-    
+
 
     }else{
       codeLatLng(lat,lng);
     }
-  
-    }; 
+
+    };
 
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
   var latlong=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
   lat=position.coords.latitude;
   lng=position.coords.longitude;
   codeLatLng(lat,lng);
-  
-  
+
+
    })
    function codeLatLng(lat, lng) {
     var geocoder = new google.maps.Geocoder();
@@ -252,7 +252,7 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
                 }
             }
         }
-        
+
 
 
         } else {
@@ -263,8 +263,8 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
       }
     });
   }
- 
-  
+
+
     function placeMarker(map, location) {
       var marker = new google.maps.Marker({
         position: location,
@@ -296,7 +296,7 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
                     }
                 }
             }
-            
+
 
 
             } else {
@@ -308,11 +308,11 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
         });
 
     }
- 
+
 
 	$('#addAsDonor-button29').click(function(){
 			//var addAsDonorInput31=$scope.addAsDonorInput31;
-      
+
 			var nic=$('#addAsDonorInput31').val();
       var gender=$('#addAsDonor_select2').val();
       var blood=$('#addAsDonor_select3').val();
@@ -321,13 +321,13 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
       {
           alert("Invalid NIC ");
       }else{
-     
+
 			//var data="addAsDonorInput31="+addAsDonorInput31;
 			if(nic == '' || gender==''|| blood=='' ){
 				$('#response').html('Required');
 			}
 			else{
-        
+
 				$.ajax({
           type:"POST",
           url:"http://127.0.0.1/IDonate/server/addAsDonor.php",
@@ -335,11 +335,11 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
           cache:false,
           success:function(result){
             alert(result);
-            if(result=="Next"){ 
+            if(result=="Next"){
               $state.go('addAsDonor2',{'term':nic});
             }else{ $state.go('iDonate2');}
 
-           
+
           }
         })
 			}
@@ -349,19 +349,19 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
 
 
 }])
-   
+
 .controller('addAsDonor2Ctrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$state) {
   $('#addAsDonor2-button31').click(function(){
       //var addAsDonorInput31=$scope.addAsDonorInput31;
-      
+
       var date=$('#addAsDonor2_input35').val();
       var no=$('#addAsDonor2_input36').val();
       var nic=$stateParams.term;
-     
-        
+
+
         $.ajax({
           type:"POST",
           url:"http://127.0.0.1/IDonate/server/addAsDonor2.php",
@@ -371,15 +371,15 @@ function ($scope, $stateParams,$state) {
             alert(result);
             if(result=="Done"){$state.go('iDonate2');}
             else{$state.go('addAsDonor2');}
-            
-            
+
+
           }
         })
-    
+
   });
 
 }])
-   
+
 .controller('addAsDonor3Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -394,7 +394,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('viewCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -402,7 +402,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('remindersCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -410,7 +410,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('statusCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -418,7 +418,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('editProfileCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -464,7 +464,7 @@ $cordovaGeolocation.getCurrentPosition(options).then(function(position){
   var latlong=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
   var lat=position.coords.latitude;
   var lng=position.coords.longitude;
-  
+
     var image = {
     url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
     // This marker is 20 pixels wide by 32 pixels high.
@@ -479,8 +479,8 @@ $cordovaGeolocation.getCurrentPosition(options).then(function(position){
           zoom: 15,
           mapTypeId:google.maps.MapTypeId.ROADMAP
         };
-      
-        
+
+
         var map=new google.maps.Map(document.getElementById("getmap"),mapOption);
         $scope.map;
         var userMarker = new google.maps.Marker({
@@ -496,21 +496,21 @@ $cordovaGeolocation.getCurrentPosition(options).then(function(position){
       }
 
 
-  
-  
+
+
 )
 }])
 .controller('NotificationController', ['$scope', '$stateParams','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function($scope,$stateParams,$http) {
-      
-     
+
+
       var user_id=$stateParams.term;
       var url="http://127.0.0.1/IDonate/server/getNotification.php?user="+user_id;
       var url2="http://127.0.0.1/IDonate/server/getNotification2.php?user="+user_id;
-      
-      
+
+
     $http.get(url).success(
       function(response){
         $scope.items=response;
@@ -522,11 +522,11 @@ function($scope,$stateParams,$http) {
       });
 
 
-  
+
 
 
 }])
-   
+
 .controller('contactDonorCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -534,7 +534,7 @@ function ($scope, $stateParams) {
 
 
 }])
-   
+
 .controller('bloodRequestnotCtrl', ['$scope', '$stateParams', '$http','$state', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -549,7 +549,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
               var long= response.info[0].long;
               user= response.info[0].user;
               var point={lat:Number(lat), lng:Number(long) };
-              
+
               // Create a map object and specify the DOM element for display.
               var mapOption = new google.maps.Map(document.getElementById('map'), {
                 center: point,
@@ -562,7 +562,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
                 position: point,
                 title: 'Patient is here'
               });
-             
+
               $scope.map=new google.maps.Map(document.getElementById("map"),mapOption);
               var geocoder = new google.maps.Geocoder();
                   var latlng = new google.maps.LatLng(Number(lat), Number(long));
@@ -584,7 +584,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
                                 }
                             }
                         }
-                        
+
 
 
                         } else {
@@ -596,7 +596,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
                     });
 
             } )
-                  
+
 
              $('#bloodRequestnot-button17').click(function(){
               $state.go('notification',{'term':user});
@@ -622,23 +622,52 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
                         success:function(result){
                           if(result=="Done"){$state.go('notification',{'term':user}, { reload: true });}
                           else{$state.go('bloodRequestnot',{'term':No});}
-                          
-                          
+
+
                         }
                       })
-                              
-                 
+
+
                } else {
                  console.log('You are not sure');
                }
              });
-           };  
+           };
 
-            
+
 
 
 }])
-   
+
+.controller('candonateCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+  $scope.bloodTypes = {
+    "A+" : { "give" : ["A+", "AB+"], "get" : ["A+", "A-", "O+", "O-"] },
+    "O+" : { "give" : ["O+", "A+", "B+", "AB+"], "get" : ["O+", "O-"] },
+    "B+" : { "give" : ["B+", "AB+"], "get" : ["B+", "B-", "O+", "O-"] },
+    "AB+" : { "give" : ["AB+"], "get" : ["Everyone"] },
+    "A-" : { "give" : ["A+", "A-", "AB+", "AB-"], "get" : ["A-", "O-"] },
+    "O-" : { "give" : ["Everyone"], "get" : ["O-"] },
+    "B-" : { "give" : ["B+", "B-", "AB+", "AB-"], "get" : ["B-", "O-"] },
+    "AB-" : { "give" : ["AB+", "AB-"], "get" : ["AB-", "A-", "B-", "O-"] }
+  };
+
+  $scope.bloodSelected = false;
+  $scope.currentBloodGroups = null;
+
+  $scope.checkBlood = function (selectedBlood) {
+    if (typeof selectedBlood != 'undefined') {
+      $scope.bloodSelected = selectedBlood;
+      $scope.currentBloodGroups = $scope.bloodTypes[selectedBlood];
+    }
+  }
+
+  $scope.goBack = function () {
+    $scope.bloodSelected = false;
+  }
+
+  console.log($stateParams);
+}])
+
 .controller('verifiedStatusCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName

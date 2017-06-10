@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('LogIn', {
     url: '/page3',
@@ -87,7 +87,7 @@ angular.module('app.routes', [])
     templateUrl: 'templates/addAsDonor3.html',
     controller: 'addAsDonor3Ctrl'
   })
-  
+
       .state('myProfile', {
     url: '/myProfile',
     templateUrl: 'templates/myProfile.html',
@@ -141,9 +141,15 @@ angular.module('app.routes', [])
     controller: 'verifiedStatusCtrl'
   })
 
+  .state('canDonate', {
+    url: '/candonate/:blood',
+    templateUrl: 'templates/candonate.html',
+    controller: 'candonateCtrl'
+  })
+
 
 $urlRouterProvider.otherwise('/page3')
 
-  
+
 
 });
