@@ -5,7 +5,7 @@ color : green;
 }
 .barclass{
   background: #D21B1B!important;
-  
+
 }
 .button ion-android-clipboard {
   font-size: 2.2rem;
@@ -27,8 +27,12 @@ color : green;
     margin: 2px;
 }
 .Homepage{
-	background: url("../img/back.jpg") no-repeat center center fixed; 
+	background: url("../img/back.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
+}
+
+.bloodTable .selectedBlood {
+  color: red;
 }

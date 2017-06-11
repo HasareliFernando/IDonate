@@ -1,0 +1,27 @@
+<ion-view title="Can You Donate?" id="status" style="">
+  <ion-content padding="true" class="has-header">
+    <div class="spacer" style="width: 283px; height: 40px;"></div>
+    <form id="status-form3" class="list" ng-if="bloodSelected == false">
+      <ion-list id="status-list3">
+        <label class="item item-select" id="status-select1">
+          <span class="input-label">* Select </span>
+          <select ng-model="selectedBlood">
+            <option value={{bloodKey}} ng-repeat="(bloodKey, bloodVal) in bloodTypes">{{bloodKey}}</option>
+          </select>
+        </label>
+      </ion-list>
+      <div class="spacer" style="width: 283px; height: 64px;"></div>
+      <button id="status-button16" class="button button-calm  button-block setrem" ng-click="checkBlood(selectedBlood)">Check</button>
+    </form>
+    <div ng-if="bloodSelected != false" class="bloodTable">
+      <h1>You have selected a blood : <span class="selectedBlood">{{bloodSelected}}</span></h1>
+
+      <div>
+        <h3>You Can Give: <span class="selectedBlood">{{ currentBloodGroups.give.join(',') }}</span></h3>
+        <h3>You Can Get: <span class="selectedBlood">{{ currentBloodGroups.get.join(',') }}</span></h3>
+      </div>
+
+      <button id="status-button16" class="button button-calm  button-block setrem" ng-click="goBack()">Back</button>
+    </div>
+  </ion-content>
+</ion-view>
