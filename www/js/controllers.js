@@ -518,7 +518,7 @@ function($scope,$stateParams,$http) {
 
      $http.get(url2).success(
       function(response2){
-        $scope.acc=response;
+        $scope.acc=response2;
       });
 
 
@@ -527,10 +527,15 @@ function($scope,$stateParams,$http) {
 
 }])
 
-.controller('contactDonorCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('contactDonorCtrl', ['$scope', '$stateParams', '$http','$state', '$ionicPopup', '$timeout', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
+  var No=$stateParams.term;
+  var url="http://127.0.0.1/IDonate/server/notificationAccept.php?no="+No;
+     
+
+
 
 
 }])

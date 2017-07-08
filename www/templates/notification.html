@@ -1,10 +1,12 @@
 <ion-view title="Notification" id="notification" style="background-color:#FFFFFF;">
   <ion-content padding="true" class="has-header">
     <div id="notification-container1" ng-repeat="accs in acc.info | orderBy: 'time'">
+    <a ui-sref="contactDonor({term: accs.No})"  >
       <ion-list id="notification-list1">
         <ion-item class="item-icon-left positive" id="notification-list-item3">
-          <i class="icon ion-waterdrop"></i>Your Request is accepted by {{accs.requester_id}}</ion-item>
+          <i class="icon ion-waterdrop"></i>Your Request is accepted by {{accs.user_id}}</ion-item>
       </ion-list>
+      </a>
       </div>
       <div id="notification-container2" ng-repeat="item in items.info | orderBy: 'time'">
       <a ui-sref="bloodRequestnot({term: item.No})"  >

@@ -124,7 +124,7 @@ angular.module('app.routes', [])
   })
 
   .state('contactDonor', {
-    url: '/contactDonor',
+    url: '/contactDonor/:term',
     templateUrl: 'templates/contactDonor.html',
     controller: 'contactDonorCtrl'
   })
