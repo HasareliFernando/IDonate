@@ -624,12 +624,38 @@ function($scope,$stateParams,$http) {
 
 }])
 
-.controller('contactDonorCtrl', ['$scope', '$stateParams', '$http','$state', '$ionicPopup', '$timeout', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('contactDonorCtrl', ['$scope', '$stateParams', '$http','$state', '$ionicPopup', '$timeout','$cordovaSocialSharing', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
-  var No=$stateParams.term;
-  var url="http://127.0.0.1/IDonate/server/sms.php?no="+No;
+function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, $timeout) {
+    var user="";
+    var No=$stateParams.term;
+    var url="http://127.0.0.1/IDonate/server/notification.php?no="+No;
+    $scope.phone='';
+            $http.get(url).success(
+            function(response){
+             $scope.items=response;
+             user= response.info[0].user;
+             
+               $.ajax({
+                type:"POST",
+                url:"http://127.0.0.1/IDonate/server/sms.php",
+                data:{user_id:user},
+                cache:false,
+                success:function(result){
+                  phone=result;
+                  }
+                })
+
+           })
+
+               $scope.sendSMS = function(number) {
+                   
+                  window.plugins.socialsharing
+                  .shareViaSMS('',number)
+    
+       
+               }
 
 
 
