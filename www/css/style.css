@@ -27,12 +27,46 @@ color : green;
     margin: 2px;
 }
 .Homepage{
-	background: url("../img/back.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
+	   background: url("../img/back1.jpg");
+     
+        background-size: cover!important;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: relative;
+}
+.callerpage{
+  background: url("../img/call.jpg");
+    background-size: cover!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: relative;
 }
 
 .bloodTable .selectedBlood {
   color: red;
+}
+.round-button {
+  width:100%;
+
+  
+}
+.round-button-circle {
+  width: 10%;
+  height:0;
+  align-items: center;
+    border-radius: 100%;
+  border:1px solid #cfdcec;
+    overflow:hidden;
+    background: #FF0000; 008000
+    box-shadow: 0 0 3px gray;
+     text-align:center;
+     color:#e2eaf3;
+    font-family:Verdana;
+    font-size:2em;
+    font-weight:bold;
+    text-decoration:none;
+
+}
+.round-button-circle:hover {
+  background:#30588e;
 }

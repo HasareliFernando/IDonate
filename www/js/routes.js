@@ -60,7 +60,7 @@ angular.module('app.routes', [])
 
   .state('bloodCompatibility', {
     url: '/page11',
-    templateUrl: 'templates/bloodCompatibility.html',
+    templateUrl: 'templates/contactDonor.html',
     controller: 'bloodCompatibilityCtrl'
   })
 
@@ -148,7 +148,7 @@ angular.module('app.routes', [])
   })
 
 
-$urlRouterProvider.otherwise('/page3')
+$urlRouterProvider.otherwise('/page5')
 
 
 

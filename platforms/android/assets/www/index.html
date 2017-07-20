@@ -3,15 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+
+
     <title></title>
 
     
     
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
+    <script  src="lib/ionic/js/jquery.min.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script  src="lib/angular/angular.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="js/ng-cordova.min.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg_cp2wP8UzZtu5RqiKNTsR999Bmdk7pU"
+    async defer></script>
+    <script type="text/javascript" src="cordova.js"></script>
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
@@ -52,13 +62,17 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/routes.js"></script>
+        <!-- Add jQuery from -->
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+
+    <!-- And then AngularJS -->
     
+
      
     <script src="js/directives.js"></script>
      
     <script src="js/services.js"></script>
     
-
     <!-- Only required for Tab projects w/ pages in multiple tabs 
     <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
     -->
@@ -67,8 +81,8 @@
   <body ng-app="app" animation="slide-left-right-ios7" class="platform-android platform-cordova platform-webview">
   <div style="">
   <div style="">
-    <ion-nav-bar class="bar barclass" style="color:#FFFFFF;">
-      <ion-nav-back-button style="color:#FFFFFF;"></ion-nav-back-button>
+    <ion-nav-bar class="bar barclass"  style="color:#FFFFFF;">
+      <ion-nav-back-button   style="color:#FFFFFF;"></ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view ></ion-nav-view>
   </div>

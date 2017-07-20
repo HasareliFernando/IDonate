@@ -8,8 +8,11 @@
 	$time=date("h:i:s");
 	$reqid="";
 	$donor_array = array();
+	$phone_array = array();
+	$firstlist=array();
 	$i=0;
 	$c=0;
+	$num=0;
 	$sql="INSERT INTO request(user_id,blood_group,blood_type,latitude,longitude) VALUES('donor1','$input1','$input2','$input3','$input4')";
 	if($conn->query($sql)===TRUE){
 		$id="SELECT MAX(req_id) AS id from request";
@@ -26,7 +29,10 @@
 			if($query->num_rows >0){
 				while($row =$query->fetch_array()){
 					$user_id=$row['user_id'];
+					$tel=$row['Phone'];
+
 					$donor_array[$i]=$user_id;
+					$phone_array[$i]=$tel;
 					$i=$i+1;
 				}
 				if($i>20){
@@ -39,10 +45,11 @@
 				
 			}
 		}foreach ($donor_array as $value) {
-			echo $date;
+			
 			$req="INSERT INTO notification(req_id,user_id, requester_id, blood_group, latitude, longtitute, date, time, approve) VALUES ('$reqid','$value','donor1','$input1','$input3','$input4','$date','$time',0)";
 			if($conn->query($req)===TRUE){
-				echo "send";
+				
+				$num=$num+1;
 
 			}
 			else{
@@ -50,6 +57,11 @@
 			}
 
 		}
+		for($i=0;$i<10;$i++){
+			$firstlist[$i]=$phone_array[$i];
+		}
+		$string_array=implode(",",$firstlist);
+		echo $string_array;
 		
 	}
 	else{

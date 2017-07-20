@@ -26,6 +26,12 @@
 		B6C32DD426BE4DA2BAB4E2F3 /* APPLocalNotificationOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80D631D4134A8DAB12D950 /* APPLocalNotificationOptions.m */; };
 		320E3C0A5D524A73AFC532C1 /* UIApplication+APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A0B836DEAF49A6A60273EE /* UIApplication+APPLocalNotification.m */; };
 		A0D126E9E81048E7A88E2EC9 /* UILocalNotification+APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B615C14C8AF440848BF1F3E5 /* UILocalNotification+APPLocalNotification.m */; };
+		BCB90994A11A4051942C0DF4 /* APPBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 222589E3859442EFB1C13F0F /* APPBadge.m */; };
+		8C8DE625C79241EDAD815A90 /* Sms.m in Sources */ = {isa = PBXBuildFile; fileRef = 16393CB92B1B41CE8C0F6928 /* Sms.m */; };
+		626304C377CE4EA9A662FB9D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18C6EA5AC14E00B3D866EC /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9A319E5C8B304417B5DA638E /* NSString+SSURLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AF51983104E2EA0E7EBEC /* NSString+SSURLEncoding.m */; };
+		F743CF5712924A8CBFD0BD29 /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7EA3BFCCAC412281B51CDA /* SocialSharing.m */; };
+		C439346E54C8440895F3023E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718AC86815F54B2D9E1D28E3 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +91,16 @@
 		8198BD37370E4C75BB73F66B /* APPLocalNotificationOptions.h */ = {isa = PBXFileReference; name = "APPLocalNotificationOptions.h"; path = "de.appplant.cordova.plugin.local-notification/APPLocalNotificationOptions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		78C0D64D0203449EB32991E5 /* UIApplication+APPLocalNotification.h */ = {isa = PBXFileReference; name = "UIApplication+APPLocalNotification.h"; path = "de.appplant.cordova.plugin.local-notification/UIApplication+APPLocalNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		C1CD3C887CE5479DA46E3A11 /* UILocalNotification+APPLocalNotification.h */ = {isa = PBXFileReference; name = "UILocalNotification+APPLocalNotification.h"; path = "de.appplant.cordova.plugin.local-notification/UILocalNotification+APPLocalNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		222589E3859442EFB1C13F0F /* APPBadge.m */ = {isa = PBXFileReference; name = "APPBadge.m"; path = "cordova-plugin-badge/APPBadge.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		8D4092F9190D46B5A7B08909 /* APPBadge.h */ = {isa = PBXFileReference; name = "APPBadge.h"; path = "cordova-plugin-badge/APPBadge.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		16393CB92B1B41CE8C0F6928 /* Sms.m */ = {isa = PBXFileReference; name = "Sms.m"; path = "cordova-sms-plugin/Sms.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		B0EDFEEA73794242983178E7 /* Sms.h */ = {isa = PBXFileReference; name = "Sms.h"; path = "cordova-sms-plugin/Sms.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		6E18C6EA5AC14E00B3D866EC /* MessageUI.framework */ = {isa = PBXFileReference; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		F87AF51983104E2EA0E7EBEC /* NSString+SSURLEncoding.m */ = {isa = PBXFileReference; name = "NSString+SSURLEncoding.m"; path = "cordova-plugin-x-socialsharing/NSString+SSURLEncoding.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		EC7EA3BFCCAC412281B51CDA /* SocialSharing.m */ = {isa = PBXFileReference; name = "SocialSharing.m"; path = "cordova-plugin-x-socialsharing/SocialSharing.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		0DA61C2869014EE8829363AC /* NSString+SSURLEncoding.h */ = {isa = PBXFileReference; name = "NSString+SSURLEncoding.h"; path = "cordova-plugin-x-socialsharing/NSString+SSURLEncoding.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		C15E638A58E5416B9D8030AC /* SocialSharing.h */ = {isa = PBXFileReference; name = "SocialSharing.h"; path = "cordova-plugin-x-socialsharing/SocialSharing.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		718AC86815F54B2D9E1D28E3 /* Social.framework */ = {isa = PBXFileReference; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +111,8 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				07BC104BEB244383BFD2930B /* CoreLocation.framework in Frameworks */,
 				2F7C7DC4175D47A2B6CAEDA5 /* libz.tbd in Frameworks */,
+				626304C377CE4EA9A662FB9D /* MessageUI.framework in Frameworks */,
+				C439346E54C8440895F3023E /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +185,8 @@
 			children = (
 				1CA246A630664CB3A411785C /* CoreLocation.framework */,
 				D479FCEF61E84F1EB4C7ADD1 /* libz.tbd */,
+				6E18C6EA5AC14E00B3D866EC /* MessageUI.framework */,
+				718AC86815F54B2D9E1D28E3 /* Social.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -209,6 +229,14 @@
 				8198BD37370E4C75BB73F66B /* APPLocalNotificationOptions.h */,
 				78C0D64D0203449EB32991E5 /* UIApplication+APPLocalNotification.h */,
 				C1CD3C887CE5479DA46E3A11 /* UILocalNotification+APPLocalNotification.h */,
+				222589E3859442EFB1C13F0F /* APPBadge.m */,
+				8D4092F9190D46B5A7B08909 /* APPBadge.h */,
+				16393CB92B1B41CE8C0F6928 /* Sms.m */,
+				B0EDFEEA73794242983178E7 /* Sms.h */,
+				F87AF51983104E2EA0E7EBEC /* NSString+SSURLEncoding.m */,
+				EC7EA3BFCCAC412281B51CDA /* SocialSharing.m */,
+				0DA61C2869014EE8829363AC /* NSString+SSURLEncoding.h */,
+				C15E638A58E5416B9D8030AC /* SocialSharing.h */,
 			);
 			name = Plugins;
 			path = "idonate/Plugins";
@@ -329,6 +357,10 @@
 				B6C32DD426BE4DA2BAB4E2F3 /* APPLocalNotificationOptions.m in Sources */,
 				320E3C0A5D524A73AFC532C1 /* UIApplication+APPLocalNotification.m in Sources */,
 				A0D126E9E81048E7A88E2EC9 /* UILocalNotification+APPLocalNotification.m in Sources */,
+				BCB90994A11A4051942C0DF4 /* APPBadge.m in Sources */,
+				8C8DE625C79241EDAD815A90 /* Sms.m in Sources */,
+				9A319E5C8B304417B5DA638E /* NSString+SSURLEncoding.m in Sources */,
+				F743CF5712924A8CBFD0BD29 /* SocialSharing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

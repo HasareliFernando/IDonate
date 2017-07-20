@@ -15,6 +15,15 @@
         },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.ionicframework.idonate761009"
+        },
+        "cordova-plugin-badge": {
+            "PACKAGE_NAME": "com.ionicframework.idonate761009"
+        },
+        "cordova-sms-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.idonate761009"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.idonate761009"
         }
     },
     "dependent_plugins": {
@@ -25,6 +34,9 @@
             "PACKAGE_NAME": "com.ionicframework.idonate761009"
         },
         "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.ionicframework.idonate761009"
+        },
+        "es6-promise-plugin": {
             "PACKAGE_NAME": "com.ionicframework.idonate761009"
         }
     }

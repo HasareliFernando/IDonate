@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('LogIn', {
     url: '/page3',
@@ -60,7 +60,7 @@ angular.module('app.routes', [])
 
   .state('bloodCompatibility', {
     url: '/page11',
-    templateUrl: 'templates/bloodCompatibility.html',
+    templateUrl: 'templates/contactDonor.html',
     controller: 'bloodCompatibilityCtrl'
   })
 
@@ -77,7 +77,7 @@ angular.module('app.routes', [])
   })
 
   .state('addAsDonor2', {
-    url: '/page14',
+    url: '/page14/:term',
     templateUrl: 'templates/addAsDonor2.html',
     controller: 'addAsDonor2Ctrl'
   })
@@ -87,7 +87,7 @@ angular.module('app.routes', [])
     templateUrl: 'templates/addAsDonor3.html',
     controller: 'addAsDonor3Ctrl'
   })
-  
+
       .state('myProfile', {
     url: '/myProfile',
     templateUrl: 'templates/myProfile.html',
@@ -117,9 +117,39 @@ angular.module('app.routes', [])
     templateUrl: 'templates/editProfile.html',
     controller: 'editProfileCtrl'
   })
+  .state('notification', {
+    url: '/notification/:term',
+    templateUrl: 'templates/notification.html',
+    controller: 'NotificationController'
+  })
 
-$urlRouterProvider.otherwise('/page3')
+  .state('contactDonor', {
+    url: '/contactDonor/:term',
+    templateUrl: 'templates/contactDonor.html',
+    controller: 'contactDonorCtrl'
+  })
 
-  
+  .state('bloodRequestnot', {
+    url: '/bloodRequestnot/:term',
+    templateUrl: 'templates/bloodRequestnot.html',
+    controller: 'bloodRequestnotCtrl'
+  })
+
+  .state('verifiedStatus', {
+    url: '/verifiedStatus',
+    templateUrl: 'templates/verifiedStatus.html',
+    controller: 'verifiedStatusCtrl'
+  })
+
+  .state('canDonate', {
+    url: '/candonate',
+    templateUrl: 'templates/candonate.html',
+    controller: 'candonateCtrl'
+  })
+
+
+$urlRouterProvider.otherwise('/page5')
+
+
 
 });

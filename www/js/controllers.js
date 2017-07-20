@@ -1,5 +1,13 @@
 angular.module('app.controllers', ['ngCordova'])
 
+.controller('MyCtrl', ['$scope', '$ionicHistory',
+function ($scope, $ionicHistory) {
+  $scope.myGoBack = function() {
+    $ionicHistory.goBack();
+  };
+}
+])
+
 .controller('LogInCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -36,10 +44,21 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('iDonate2Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('iDonate2Ctrl', ['$scope', '$stateParams', '$ionicPlatform', '$cordovaBadge','$cordovaLocalNotification', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLocalNotification) {
+
+      $ionicPlatform.ready(function() {
+        $cordovaBadge.promptForPermission();
+        $scope.setBadge = function(value) {
+            $cordovaBadge.hasPermission().then(function(result) {
+                $cordovaBadge.set(value);
+            }, function(error) {
+                alert(error);
+            });
+        }
+    });
 
 
 }])
@@ -60,10 +79,10 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('bloodRequestCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('bloodRequestCtrl', ['$scope', '$stateParams','$http','$state', '$ionicPopup', '$timeout','$cordovaSocialSharing', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$state) {
+function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialSharing) {
 
       var lat=null;
       var lng=null;
@@ -133,24 +152,45 @@ function ($scope, $stateParams,$state) {
 
       //var data="addAsDonorInput31="+addAsDonorInput31;
       if(group == '' || type==''|| lat==null ||lng==null ){
-        alert('Location Required');
+        
+        $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Required',
+               template: 'All fields are required'
+             });
+           }
       }
       else{
 
-        $.ajax({
-          type:"POST",
-          url:"http://127.0.0.1/IDonate/server/bloodRequest.php",
-          data:{bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
-          cache:false,
-          success:function(result){
-            alert(result);
-            if(result=="Your request perfectly send"){
-              $state.go('iDonate2');
-            }else{ $state.go('bloodRequest');}
+         $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Confirm',
+               template: 'Your request will send to relavent donors and You will recive notification'
+             });
+
+             confirmPopup.then(function(res) {
+               if(res) {
+
+                     $.ajax({
+                      type:"POST",
+                      url:"http://127.0.0.1/IDonate/server/bloodRequest.php",
+                      data:{bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
+                      cache:false,
+                      success:function(result){
+                       alert(result);
+                       window.plugins.socialsharing
+                        .shareViaSMS('You have new notifications in the IDOnate app.You will need to use app to see and respond them.', result)
+
+                      }
+                    })
 
 
-          }
-        })
+               } else {
+                 console.log('You are not sure');
+               }
+             });
+           };
+       
       }
 
   });
@@ -174,10 +214,35 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('bloodCompatibilityCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+
+.controller('bloodCompatibilityCtrl',['$scope', '$stateParams','$cordovaSocialSharing',
+
+ function($scope, $cordovaSocialSharing) {
+  $scope.sms = {
+    number: '0715724717',
+    message: 'This is some dummy text'
+  };
+ 
+  document.addEventListener("deviceready", function() {
+  alert('device');
+    var options = {
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: '' // send SMS with the native android SMS messaging
+          //intent: '' // send SMS without open any other app
+          //intent: 'INTENT' // send SMS inside a default SMS app
+      }
+    };
+ 
+    $scope.sendSMS = function() {
+      var num='07542,24254,5252326';
+    window.plugins.socialsharing
+    .shareViaSMS('Ha',num)
+    
+       
+    }
+  });
+
 
 
 }])
@@ -190,13 +255,13 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('addAsDonorCtrl', ['$scope', '$stateParams', '$cordovaGeolocation','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addAsDonorCtrl', ['$scope', '$stateParams', '$cordovaGeolocation','$http','$state', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 
 
 
-function ($scope, $stateParams,$cordovaGeolocation,$state) {
+function ($scope, $stateParams,$cordovaGeolocation,$http,$state,$ionicPopup,$timeout) {
   var options={timeout:1000, enableHighAccuracy: false};
   var geocoder;
   var lat;
@@ -319,7 +384,14 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
       myRegExp = new RegExp(/^[0-9]{9}[vVxX]$/);
       if(!(myRegExp.test(nic)))
       {
-          alert("Invalid NIC ");
+     
+     $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Invalid NIC',
+               template: 'Please check your NIC number!'
+             });
+           }
+          
       }else{
 
 			//var data="addAsDonorInput31="+addAsDonorInput31;
@@ -334,10 +406,33 @@ function ($scope, $stateParams,$cordovaGeolocation,$state) {
           data:{addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood,Location:lat,Location2:lng},
           cache:false,
           success:function(result){
-            alert(result);
+           
             if(result=="Next"){
-              $state.go('addAsDonor2',{'term':nic});
-            }else{ $state.go('iDonate2');}
+               $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Confirm',
+               template: 'Next step'
+             });
+
+             confirmPopup.then(function(res) {
+              $state.go('addAsDonor2',{'term':nic}); 
+             });
+           };
+              
+            }else{
+               $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Something do worng!',
+               template: 'you already register as a donor'
+             });
+
+             confirmPopup.then(function(res) {
+              $state.go('iDonate2');
+             });
+           };
+              
+            
+             }
 
 
           }
@@ -509,6 +604,7 @@ function($scope,$stateParams,$http) {
       var user_id=$stateParams.term;
       var url="http://127.0.0.1/IDonate/server/getNotification.php?user="+user_id;
       var url2="http://127.0.0.1/IDonate/server/getNotification2.php?user="+user_id;
+     
 
 
     $http.get(url).success(
@@ -520,6 +616,7 @@ function($scope,$stateParams,$http) {
       function(response2){
         $scope.acc=response2;
       });
+     
 
 
 
@@ -532,7 +629,10 @@ function($scope,$stateParams,$http) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
   var No=$stateParams.term;
-  var url="http://127.0.0.1/IDonate/server/notificationAccept.php?no="+No;
+  var url="http://127.0.0.1/IDonate/server/sms.php?no="+No;
+
+
+
      
 
 

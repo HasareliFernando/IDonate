@@ -4,9 +4,69 @@ font-size: ;
 color : green;
 }
 .barclass{
-  background: #ff1930!important;
-  
+  background: #D21B1B!important;
+
 }
 .button ion-android-clipboard {
   font-size: 2.2rem;
+}
+.scroll{
+	height: 100%;
+}
+#map{
+	width: 100%;
+	height: 100%;
+}
+#getmap{
+	width: 100%;
+	height: 40%;
+}
+.img{
+    width: 45.7vw;
+    height: 100px; //some custom height
+    margin: 2px;
+}
+.Homepage{
+	   background: url("../img/back1.jpg");
+     
+        background-size: cover!important;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: relative;
+}
+.callerpage{
+  background: url("../img/call.jpg");
+    background-size: cover!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: relative;
+}
+
+.bloodTable .selectedBlood {
+  color: red;
+}
+.round-button {
+  width:100%;
+
+  
+}
+.round-button-circle {
+  width: 10%;
+  height:0;
+  align-items: center;
+    border-radius: 100%;
+  border:1px solid #cfdcec;
+    overflow:hidden;
+    background: #FF0000; 008000
+    box-shadow: 0 0 3px gray;
+     text-align:center;
+     color:#e2eaf3;
+    font-family:Verdana;
+    font-size:2em;
+    font-weight:bold;
+    text-decoration:none;
+
+}
+.round-button-circle:hover {
+  background:#30588e;
 }
