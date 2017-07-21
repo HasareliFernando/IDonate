@@ -41,6 +41,14 @@ color : green;
     background-repeat: no-repeat;
     background-attachment: relative;
 }
+.comp{
+
+  background: url("../img/donate.png");
+    background-size: cover!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: relative;
+}
 
 .bloodTable .selectedBlood {
   color: red;

@@ -2,30 +2,74 @@
   <ion-content padding="true" class="has-header">
   <div >
   <ion-list id="notification-list1">
-    <div id="notification-container1" ng-repeat="accs in acc.info | orderBy: 'time'">
-    <a ui-sref="contactDonor({term: accs.No})"  >
+    <div id="notification-container1" ng-if="requestSelected == false">
+        <ion-item class="item-icon-left positive" id="notification-list-item3 ">
+        <div style="z-index: 1000;" ng-click="req_select()">
+          <i class="icon ion-waterdrop" ></i>Accept Notification</div></ion-item>
+
+    </div>
+    <div ng-if="requestSelected == true" >
+    <div id="notification-container1"  ng-repeat="accs in acc.info | orderBy: 'time'">
+        <a ui-sref="contactDonor({term: accs.No})"  >
       
         <ion-item class="item-icon-left positive" id="notification-list-item3">
           <i class="icon ion-waterdrop"></i>Your Request is accepted by {{accs.user_id}}<br>{{accs.date}}</ion-item>
 
       
-      </a>
+        </a>
       </div>
-      <div id="notification-container2" ng-repeat="item in items.info | orderBy: 'time'">
-      <a ui-sref="bloodRequestnot({term: item.No})"  >
+      <button  class="button button-assertive  button-block setrem" ng-click="goBack()">Back</button>
+    </div>
+
+      <div id="notification-container2" ng-if="acceptSelected == false">
+      <ion-item class="item-icon-left assertive" id="notification-list-item10" ng-click="acc_select()" >
+            <i class="icon ion-waterdrop"></i>Request Notification</ion-item>
+      </div>
+      <div ng-if="acceptSelected == true" >
+      <div id="notification-container2"  ng-repeat="item in items.info | orderBy: 'time'">
+          <a ui-sref="bloodRequestnot({term: item.No})"  >
         
           <ion-item class="item-icon-left assertive" id="notification-list-item10" >
             <i class="icon ion-waterdrop"></i>You have a blood request by  {{item.requester_id}}<br>{{item.date}}
             </ion-item>
         
-        </a>
+          </a>
       </div>
-    
-    <div id="notification-container3">
+      <button   class="button button-assertive  button-block setrem" ng-click="goBack()">Back</button>
+      </div>
+
+      <div id="notification-container3" ng-if="verifySelected == false" >
+      
+        <ion-item class="item-icon-left balanced" id="notification-list-item17" ng-click="ver_select()">
+          <i class="icon ion-android-bulb"></i>Verify Notification</ion-item>
+      
+    </div>
+    <div ng-if="verifySelected == true" >
+    <div id="notification-container3" ng-if="verifySelected != false">
       
         <ion-item class="item-icon-left balanced" id="notification-list-item17">
           <i class="icon ion-android-bulb"></i>----- verify your donation record</ion-item>
+
       
+    </div>
+    <button  class="button button-assertive  button-block setrem" ng-click="goBack()">Back</button>
+    </div>
+
+      <div id="notification-container4" ng-if="reminderSelected == false" >
+      
+        <ion-item class="item-icon-left energized" id="notification-list-item18" ng-click="rem_select()">
+          <i class="icon ion-clock"></i>Reminder Notification</ion-item>
+      
+    </div>
+    <div ng-if="reminderSelected == true" >
+    <div id="notification-container4" ng-if="reminderSelected != false">
+      
+        <ion-item class="item-icon-left energized" id="notification-list-item18">
+          <i class="icon ion-clock"></i>You can Blood donate ------</ion-item>
+
+      
+    </div>
+    <button  class="button button-assertive  button-block setrem" ng-click="goBack()">Back</button>
     </div>
    </ion-list>
    </div>

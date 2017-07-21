@@ -604,20 +604,55 @@ function($scope,$stateParams,$http) {
       var user_id=$stateParams.term;
       var url="http://127.0.0.1/IDonate/server/getNotification.php?user="+user_id;
       var url2="http://127.0.0.1/IDonate/server/getNotification2.php?user="+user_id;
+    
      
+      $scope.requestSelected = false;
+      $scope.acceptSelected = false;
+      $scope.verifySelected = false;
+      $scope.reminderSelected = false;
 
-
-    $http.get(url).success(
-      function(response){
-        $scope.items=response;
-      });
-
-     $http.get(url2).success(
+  $scope.req_select = function () {
+    $scope.requestSelected = true;
+    $scope.acceptSelected = null;
+    $scope.verifySelected = null;
+    $scope.reminderSelected = null;
+    $http.get(url2).success(
       function(response2){
         $scope.acc=response2;
       });
-     
+  }
+   $scope.acc_select = function () {
+   $scope.requestSelected = null;
+    $scope.acceptSelected = true;
+    $scope.verifySelected = null;
+    $scope.reminderSelected = null;
+     $http.get(url).success(
+      function(response){
+        $scope.items=response;
+      });
+  }
+   $scope.ver_select = function () {
+    $scope.requestSelected = null;
+    $scope.acceptSelected = null;
+    $scope.verifySelected = true;
+    $scope.reminderSelected = null;
+    
+  }
+   $scope.rem_select = function () {
+    $scope.requestSelected = null;
+    $scope.acceptSelected = null;
+    $scope.verifySelected = null;
+    $scope.reminderSelected = true;
+    
+  }
 
+
+  $scope.goBack = function () {
+     $scope.requestSelected = false;
+      $scope.acceptSelected = false;
+      $scope.verifySelected = false;
+      $scope.reminderSelected = false;
+  }
 
 
 
@@ -628,14 +663,14 @@ function($scope,$stateParams,$http) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, $timeout) {
-    var user="";
+    
     var No=$stateParams.term;
     var url="http://127.0.0.1/IDonate/server/notification.php?no="+No;
-    $scope.phone='';
+    
             $http.get(url).success(
             function(response){
              $scope.items=response;
-             user= response.info[0].user;
+             $scope.user= response.info[0].user;
              
                $.ajax({
                 type:"POST",
@@ -643,7 +678,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, 
                 data:{user_id:user},
                 cache:false,
                 success:function(result){
-                  phone=result;
+                  $scope.phone=result;
                   }
                 })
 
