@@ -1,26 +1,19 @@
-<ion-view title="Blood Compatibility" id="page11" style="background-color: rgb(254, 253, 254);">
-  <ion-nav-buttons side="right" class="has-header">
-    <button class="button button-icon icon ion-android-menu"></button>
-  </ion-nav-buttons>
-   <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">SMS Example</h1>
-      </ion-header-bar>
-      <ion-content>
-        <div class="list">
-          <label class="item item-input">
-            <span class="input-label">Number</span>
-            <input type="text" ng-model="sms.number">
-          </label>
-          <label class="item item-input item-floating-label">
-            <span class="input-label">Message</span>
-            <input type="text" placeholder="Message" ng-model="sms.message">
-          </label>
-          <button class="button button-full button-positive" ng-click="sendSMS()">
-            Send SMS
-          </button>
-        </div>    
-        <a href="tel:+1-1800-555-5555" class="button button-positive">Call me</a>  
-      </ion-content>
-    </ion-pane>
+<ion-view title="Add Image" id="page11" style="background-color: rgb(254, 253, 254);"  class="Homepage">
+  
+ <ion-pane>
+    <ion-header-bar class="bar-positive">
+      <h1 class="title">Devdactic Image Upload</h1>
+    </ion-header-bar>
+    <ion-content>
+      <img ng-src="{{pathForImage(image)}}" style="width: 100%; height: 100%;">
+    </ion-content>
+    <ion-footer-bar class="bar bar-positive">
+      <div class="button-bar">
+        <button class="button icon-left ion-camera" ng-click="loadImage()">Take Photo</button>
+        <button class="button icon-left ion-upload" ng-click="uploadImage()" ng-disabled="image === null">Upload</button>
+      </div>
+    </ion-footer-bar>
+  </ion-pane>
+  
+
 </ion-view>

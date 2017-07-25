@@ -1,43 +1,44 @@
-<ion-view title="Add Post" id="page9" style="background-color: rgb(254, 253, 254);">
+<ion-view title="Add Post" id="page9" style="background-color: rgb(254, 253, 254);"  class="Homepage">
   <ion-nav-buttons side="right" class="has-header">
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <form id="addPost-form6" class="list addPost">
-      <label class="item item-input addPostid" id="addPost-input10" name="pid">
-        <span class="input-label">User ID</span>
+      <label class="item item-input addPostid"  name="pid">
+        <span class="input-label" id="addPost-input10">User ID  :{{userid}}</span>
         <input placeholder="" type="text">
       </label>
-      <label class="item item-input addPostvan" id="addPost-input11" name="padd">
+      <label class="item item-input addPostvan"  name="padd">
         <span class="input-label">Vanue</span>
-        <input placeholder="" type="text">
+        <input placeholder="" type="text" id="addPost-input11">
       </label>
-      <label class="item item-input addPostdate" id="addPost-input12" name="pdate">
+      <label class="item item-input addPostdate"  name="pdate" >
         <span class="input-label">Date</span>
-        <input placeholder="" type="date">
+        <input placeholder="" type="date" id="addPost-input12">
       </label>
       <h4 id="addPost-heading5" style="color: rgb(0, 0, 0); font-weight: 400;" class="addPostTime">Time</h4>
-      <label class="item item-input addPostTimeFrom" id="addPost-input16" name="pFtime">
+      <label class="item item-input addPostTimeFrom"  name="pFtime">
         <span class="input-label">From</span>
-        <input placeholder="" type="time">
+        <input placeholder="" type="time" id="addPost-input16">
       </label>
-      <label class="item item-input addPostTimeTo" id="addPost-input18" name="pTtime">
+      <label class="item item-input addPostTimeTo"  name="pTtime">
         <span class="input-label">To</span>
-        <input placeholder="" type="time">
+        <input placeholder="" type="time" id="addPost-input18">
       </label>
-      <label class="item item-input item-stacked-label addPostDes" id="addPost-input19" name="pDes">
+      <label class="item item-input item-stacked-label addPostDes"  name="pDes">
         <span class="input-label">Description</span>
-        <input placeholder="" type="text">
+        <input placeholder="" type="text" id="addPost-input19">
       </label>
-      <label class="item item-input addPostImage" id="addPost-input20" name="pIm">
+      <label class="item item-input addPostImage"  name="pIm">
         <span class="input-label">Image</span>
-        <input placeholder="" type="text">
+        <button  class="butto" ui-sref="bloodCompatibility({user: userid})">Add Image</button>
+        <input placeholder="" type="text" id="addPost-input20">
       </label>
-      <label class="item item-input addPostContact" id="addPost-input21" name="pPhn">
+      <label class="item item-input addPostContact"  name="pPhn">
         <span class="input-label">Contact</span>
-        <input placeholder="" type="tel">
+        <input placeholder="" type="tel" id="addPost-input21">
       </label>
-      <button id="addPost-button8" class="button button-assertive button-block addPostConfrm">Confirm</button>
+      <button id="addPost-button8" class="button button-assertive button-block addPostConfrm" ng-click="showConfirm()">Confirm</button>
     </form>
   </ion-content>
 </ion-view>

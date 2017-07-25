@@ -13,26 +13,7 @@ function ($scope, $ionicHistory) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 
-    $('#LogIn-button4').click(function(){
-        var user = $('#input_name').val();
-        var pass = $('#input_tel').val();
-        if(user == null || pass == null){
-          $('#response').html('Please fill the boxes');
-        }
-        else{
-          $.ajax({
-            type: "POST",
-            url: "http://127.0.0.1/IDonate/server/login.php",
-            data: {input_name:name,input_tel:tel},
-            cache: false,
-            success: function(result){
-              alert('success');
-            }
-          });
-        }
-
-
-    });
+  
 
 }])
 
@@ -44,21 +25,63 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('iDonate2Ctrl', ['$scope', '$stateParams', '$ionicPlatform', '$cordovaBadge','$cordovaLocalNotification', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('iDonate2Ctrl', ['$scope','$state' ,'$stateParams', '$ionicPlatform', '$cordovaBadge','$cordovaLocalNotification','$http','$cordovaBadge','$timeout', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLocalNotification) {
+function ($scope,$state, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLocalNotification,$http, $cordovaBadge,$timeout) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
 
-      $ionicPlatform.ready(function() {
-        $cordovaBadge.promptForPermission();
-        $scope.setBadge = function(value) {
-            $cordovaBadge.hasPermission().then(function(result) {
-                $cordovaBadge.set(value);
-            }, function(error) {
-                alert(error);
-            });
-        }
-    });
+  var bag1=0;
+  var bag2=0;
+  var num=0;
+    $scope.username=$stateParams.user;
+    var user=$scope.username;
+
+      var url3="http://idonate.000webhostapp.com/server/countnotification.php?user="+user;
+      var url4="http://idonate.000webhostapp.com/server/countnotification2.php?user="+user;
+
+       $timeout(function(){
+        $http.get(url3).success(
+      function(response){
+        if(response.status==1){
+        bag1=response.info[0].count;
+        num=num+bag1;
+      }
+      });
+      
+       
+        $http.get(url4).success(
+      function(response2){
+        if(response2.status==1){
+        bag2=response2.info[0].count;
+        num=num+bag2;
+      }
+      });
+
+      
+       $scope.badge=num;
+        }, 10);
+       $scope.Notification = function() {
+
+
+                $http.get(url3).success(
+                function(response){
+                  if(response.status==1){
+                  bag1=response.info[0].count;
+                }
+                });
+                
+                 
+                  $http.get(url4).success(
+                function(response2){
+                  if(response2.status==1){
+                  bag2=response2.info[0].count;
+                }
+                });
+
+
+             $state.go('notification',{'term':$scope.username,'bag1':bag1,'bag2':bag2});
+           }
 
 
 }])
@@ -67,14 +90,20 @@ function ($scope, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLocalNotif
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-
+ 
 
 }])
 
-.controller('timelineCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('timelineCtrl', ['$scope', '$stateParams', '$http','$state', '$ionicPopup',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$state,$ionicPopup) {
+$state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+  $http.get("http://idonate.000webhostapp.com/server/getPost.php").success(
+      function(response){
+        $scope.acc=response;
+      });
+  $scope.username=$stateParams.user;
 
 
 }])
@@ -83,7 +112,8 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialSharing) {
-
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+      $scope.user=$stateParams.user;
       var lat=null;
       var lng=null;
       var mapCanvas = document.getElementById("map");
@@ -97,6 +127,7 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialS
 
 
     function placeMarker(map, location) {
+      var city=null;
       var marker = new google.maps.Marker({
         position: location,
         map: map
@@ -148,7 +179,7 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialS
       var group=$('#bloodRequest_select1').val();
       var type=$('#bloodRequest_select2').val();
 
-
+      
 
       //var data="addAsDonorInput31="+addAsDonorInput31;
       if(group == '' || type==''|| lat==null ||lng==null ){
@@ -173,14 +204,22 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialS
 
                      $.ajax({
                       type:"POST",
-                      url:"http://127.0.0.1/IDonate/server/bloodRequest.php",
-                      data:{bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
+                      url:"http://idonate.000webhostapp.com/server/bloodRequest.php",
+                      data:{userid:$scope.user,bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
                       cache:false,
                       success:function(result){
-                       alert(result);
-                       window.plugins.socialsharing
+                        if(result == 'No Eligible Donors Found'){
+                          var confirmPopup = $ionicPopup.confirm({
+                           title: 'Error loading, please retry',
+                           template: 'No Eligible Donors Found'
+                         });
+
+                        }else{
+                            window.plugins.socialsharing
                         .shareViaSMS('You have new notifications in the IDOnate app.You will need to use app to see and respond them.', result)
 
+                        }
+                       
                       }
                     })
 
@@ -198,11 +237,64 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialS
 
 }])
 
-.controller('addPostCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addPostCtrl', ['$scope', '$stateParams','$http','$state','$ionicPopup','$timeout','$ionicHistory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$ionicHistory) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+  $scope.userid=$stateParams.user;
+  $('#addPost-button8').click(function(){
+      //var addAsDonorInput31=$scope.addAsDonorInput31;
+      
+      var vanue=$('#addPost-input11').val();
+      var date=$('#addPost-input12').val();
+      var time_f=$('#addPost-input16').val();
+      var time_t=$('#addPost-input18').val();
+      var description=$('#addPost-input19').val();
+      var contact=$('#addPost-input21').val();
+       if(vanue =='' || date=='' || time_f=='' || time_t=='' || description=='' || contact=='' ){
+      
+        $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Required',
+               template: 'All fields are required without image'
+             });
+           }
+      }else{ 
+       
+       $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Confirm',
+               template: 'Confirm to post this'
+             });
 
+             confirmPopup.then(function(res) {
+                $.ajax({
+                      type:"POST",
+                      url:"http://idonate.000webhostapp.com/server/addPost.php",
+                      data:{user:$stateParams.user,input_vanue:vanue,input_date:date,input_timeF:time_f,input_timeT:time_t,input_desc:description,input_contact:contact},
+                      cache:false,
+                      success:function(result){
+                        alert(result);
+                         $state.transitionTo('timeline', {}, { reload: 'timeline'});
+
+                       
+                      }
+                 }) 
+             });
+           };
+
+
+
+         
+    }
+
+
+
+
+
+      })
+ 
 
 }])
 
@@ -215,33 +307,206 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('bloodCompatibilityCtrl',['$scope', '$stateParams','$cordovaSocialSharing',
+.controller('bloodCompatibilityCtrl',['$scope','$state', '$stateParams','$cordovaSocialSharing','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$cordovaDevice', '$ionicPopup', '$cordovaActionSheet',
 
- function($scope, $cordovaSocialSharing) {
-  $scope.sms = {
-    number: '0715724717',
-    message: 'This is some dummy text'
+function($scope,$state,$stateParams, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+  $scope.image = null;
+ 
+  $scope.showAlert = function(title, msg) {
+    var alertPopup = $ionicPopup.alert({
+      title: title,
+      template: msg
+    });
   };
- 
-  document.addEventListener("deviceready", function() {
-  alert('device');
-    var options = {
-      replaceLineBreaks: false, // true to replace \n by a new line, false by default
-      android: {
-        intent: '' // send SMS with the native android SMS messaging
-          //intent: '' // send SMS without open any other app
-          //intent: 'INTENT' // send SMS inside a default SMS app
-      }
-    };
- 
-    $scope.sendSMS = function() {
-      var num='07542,24254,5252326';
-    window.plugins.socialsharing
-    .shareViaSMS('Ha',num)
+   // Present Actionsheet for switch beteen Camera / Library
+// Present Actionsheet for switch beteen Camera / Library
+ document.addEventListener("deviceready", function() {  // Present Actionsheet for switch beteen Camera / Library
+$scope.loadImage = function() { 
+  var options = {
+    title: 'Select Image Source',
+    buttonLabels: ['Load Library', 'Use Camera'],
+    addCancelButtonWithLabel: 'Cancel',
+    androidEnableCancelButton : true,
+  };
+    window.plugins.actionsheet.show(options,function(btnIndex) {
     
-       
+    var type = null;
+    if (btnIndex === 1) {
+      type = Camera.PictureSourceType.PHOTOLIBRARY;
+    } else if (btnIndex === 2) {
+      type = Camera.PictureSourceType.CAMERA;
+    }
+    if (type !== null) {
+      
+      $scope.selectPicture(type);
+
+    }else{
+      
     }
   });
+};
+})
+
+// Take image with the camera or from library and store it inside the app folder
+// Image will not be saved to users Library.
+$scope.selectPicture = function(sourceType){
+ 
+  navigator.camera.getPicture(onSuccess, onFail, {
+                
+                  quality: 100,
+                  destinationType: Camera.DestinationType.FILE_URI,
+                  sourceType: sourceType,
+                  saveToPhotoAlbum: false
+                
+            });
+
+
+        function onSuccess(imagePath) {
+          
+                        // Grab the file name of the photo in the temporary directory
+              var currentName = imagePath.replace(/^.*[\\\/]/, '');
+           
+              //Create a new name for the photo
+              var d = new Date(),
+              n = d.getTime(),
+              newFileName =  n + ".jpg";
+           
+              // If you are trying to load image from the gallery on Android we need special treatment!
+              if (device.platform == 'Android' && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
+                
+                window.FilePath.resolveNativePath(imagePath, function(entry) {
+                  
+                  window.resolveLocalFileSystemURL(entry, copyFile, fail);
+                  
+                  function fail(e) {
+                    alert(e);
+                    console.error('Error: ', e);
+                  }
+                    function copyFile(fileEntry) {
+                          var namePath = fileEntry.nativeURL.substr(0, fileEntry.nativeURL.lastIndexOf('/') + 1);
+                          
+                          window.resolveLocalFileSystemURL(
+                            cordova.file.dataDirectory, 
+                            function(namePath) {
+                              fileEntry.copyTo(
+                                namePath, 
+                                newFileName, 
+                                onCopySuccess, 
+                                fail
+                              );
+
+                            }, 
+                            fail
+                          ); 
+                        }
+                              function onCopySuccess(entry) {
+                                  
+                                  $scope.image = newFileName;
+                                  pathForImage(image);
+                                }
+
+                                function fail(error) {
+                                  $scope.showAlert('Error', error.exception);
+                                }
+                }
+              );
+              } else {
+                
+                var namePath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+                window.FilePath.resolveNativePath(imagePath, function(entry) {
+                window.resolveLocalFileSystemURL(entry, moveFile, fail);
+                  
+                  function fail(e) {
+                    alert(e);
+                    console.error('Error: ', e);
+                  }
+                    function moveFile(fileEntry) {
+                           
+                          
+                          window.resolveLocalFileSystemURL(
+                            cordova.file.dataDirectory, 
+                            function(namePath) {
+                              
+                              fileEntry.moveTo(
+                                namePath, 
+                                newFileName, 
+                                onCopySuccess, 
+                                fail
+                              );
+
+                            }, 
+                            fail
+                          ); 
+                        }
+                              function onCopySuccess(entry) {
+                                  
+                                  $scope.image = newFileName;
+                                  pathForImage(image);
+                                }
+
+                                function fail(error) {
+                                  $scope.showAlert('Error', error.exception);
+                                }
+              });
+                // Move the file to permanent storage
+               
+              }
+
+        }
+
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+  
+};
+
+// Returns the local path inside the app for an image
+function  pathForImage(image) {
+  if (image === null) {
+    $scope.src='None';
+  } else {
+    $scope.src=cordova.file.dataDirectory + image;
+  }
+};
+
+$scope.uploadImage = function() {
+  // Destination URL
+  var url = "http://idonate.000webhostapp.com/server/upload.php";
+ 
+  // File for Upload
+  var targetPath = $scope.pathForImage($scope.image);
+ 
+  // File name only
+  var filename = $scope.image;;
+ 
+ 
+
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName="filename";
+    options.chunkedMode = false;
+    options.mimeType="multipart/form-data";
+    var params = {};
+    params.fileName = filename;
+    options.params = params;
+
+    var ft = new FileTransfer();
+
+    ft.upload(targetPath, encodeURI(url), function(e){
+          $ionicLoading.hide();
+          alert("upload success!");
+        },
+        function(e){
+          $ionicLoading.hide();
+          alert("Upload failed!");
+        }, options)
+
+
+
+
+}
+
 
 
 
@@ -255,19 +520,20 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('addAsDonorCtrl', ['$scope', '$stateParams', '$cordovaGeolocation','$http','$state', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addAsDonorCtrl', ['$scope', '$state','$stateParams', '$cordovaGeolocation','$http','$state', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 
 
 
-function ($scope, $stateParams,$cordovaGeolocation,$http,$state,$ionicPopup,$timeout) {
+function ($scope,$state, $stateParams,$cordovaGeolocation,$http,$state,$ionicPopup,$timeout) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
   var options={timeout:1000, enableHighAccuracy: false};
   var geocoder;
   var lat;
   var lng;
   $scope.locationmodel="GeoLocation";
-
+   var userid=$stateParams.user;
   $scope.locationChange = function (locationmodel) {
 
     if(locationmodel=="Set Location"){
@@ -402,8 +668,8 @@ function ($scope, $stateParams,$cordovaGeolocation,$http,$state,$ionicPopup,$tim
 
 				$.ajax({
           type:"POST",
-          url:"http://127.0.0.1/IDonate/server/addAsDonor.php",
-          data:{addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood,Location:lat,Location2:lng},
+          url:"http://idonate.000webhostapp.com/server/addAsDonor.php",
+          data:{user:userid,addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood,Location:lat,Location2:lng},
           cache:false,
           success:function(result){
            
@@ -449,6 +715,7 @@ function ($scope, $stateParams,$cordovaGeolocation,$http,$state,$ionicPopup,$tim
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$state) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
   $('#addAsDonor2-button31').click(function(){
       //var addAsDonorInput31=$scope.addAsDonorInput31;
 
@@ -459,7 +726,7 @@ function ($scope, $stateParams,$state) {
 
         $.ajax({
           type:"POST",
-          url:"http://127.0.0.1/IDonate/server/addAsDonor2.php",
+          url:"http://idonate.000webhostapp.com/server/addAsDonor2.php",
           data:{addAsDonor2_input35:date,addAsDonor2_input36:no,Nic:nic},
           cache:false,
           success:function(result){
@@ -479,6 +746,7 @@ function ($scope, $stateParams,$state) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  $scope.userid=$stateParams.user;
 
 
 }])
@@ -595,28 +863,104 @@ $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 
 )
 }])
-.controller('NotificationController', ['$scope', '$stateParams','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('NotificationController', ['$scope','$state', '$stateParams','$http', '$ionicPlatform', '$cordovaBadge','$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function($scope,$stateParams,$http) {
-
+function($scope,$state,$stateParams,$http, $ionicPlatform, $cordovaBadge,$timeout) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+    $scope.user=$stateParams.user;
 
       var user_id=$stateParams.term;
-      var url="http://127.0.0.1/IDonate/server/getNotification.php?user="+user_id;
-      var url2="http://127.0.0.1/IDonate/server/getNotification2.php?user="+user_id;
+      var url="http://idonate.000webhostapp.com/server/getNotification.php?user="+user_id;
+      var url2="http://idonate.000webhostapp.com/server/getNotification2.php?user="+user_id;
      
 
+     
+       
+        $scope.bagreq=$stateParams.bag1;
+       
+        $scope.bagacc=$stateParams.bag2;
+      
+      
+     
+      $scope.requestSelected = false;
+      $scope.acceptSelected = false;
+      $scope.verifySelected = false;
+      $scope.reminderSelected = false;
 
-    $http.get(url).success(
-      function(response){
-        $scope.items=response;
-      });
-
-     $http.get(url2).success(
+  $scope.req_select = function () {
+    $scope.requestSelected = true;
+    $scope.acceptSelected = null;
+    $scope.verifySelected = null;
+    $scope.reminderSelected = null;
+     $timeout(function(){
+        $http.get(url2).success(
       function(response2){
         $scope.acc=response2;
       });
+      }, 10);
+  }
+   $scope.acc_select = function () {
+   $scope.requestSelected = null;
+    $scope.acceptSelected = true;
+    $scope.verifySelected = null;
+    $scope.reminderSelected = null;
+    $timeout(function(){
+     $http.get(url).success(
+      function(response){
+        $scope.items=response;
+      });
+     }, 10);
+  }
+   $scope.ver_select = function () {
+    $scope.requestSelected = null;
+    $scope.acceptSelected = null;
+    $scope.verifySelected = true;
+    $scope.reminderSelected = null;
+    
+  }
+   $scope.rem_select = function () {
+    $scope.requestSelected = null;
+    $scope.acceptSelected = null;
+    $scope.verifySelected = null;
+    $scope.reminderSelected = true;
+    
+  }
+
+
+  $scope.goBack = function () {
+     $scope.requestSelected = false;
+      $scope.acceptSelected = false;
+      $scope.verifySelected = false;
+      $scope.reminderSelected = false;
+      $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+      $scope.bagreq=0;
+
+  }
+   $scope.goBack1 = function () {
+     $scope.requestSelected = false;
+      $scope.acceptSelected = false;
+      $scope.verifySelected = false;
+      $scope.reminderSelected = false;
+      $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
+      $scope.bagacc=0;
+  }
+  $scope.undo = function (no) {
+     $.ajax({
+                type:"POST",
+                url:"http://idonate.000webhostapp.com/server/undo.php",
+                data:{No:no},
+                cache:false,
+                success:function(result){
+                  
+                  }
+                });
+
      
+  }
+
+
+
 
 
 
@@ -628,34 +972,34 @@ function($scope,$stateParams,$http) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, $timeout) {
-    
+    $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
     var No=$stateParams.term;
-    var url="http://127.0.0.1/IDonate/server/notification.php?no="+No;
+    $scope.user=$stateParams.user;
+    $scope.phone='+000,000,000';
     
-            $http.get(url).success(
-            function(response){
-             $scope.items=response;
-             $scope.user= response.info[0].user;
-             
+           
+             $scope.getnum=function(){
                $.ajax({
                 type:"POST",
-                url:"http://127.0.0.1/IDonate/server/sms.php",
-                data:{user_id:user},
+                url:"http://idonate.000webhostapp.com/server/sms.php",
+                data:{user_id:$scope.user},
                 cache:false,
                 success:function(result){
                   $scope.phone=result;
+                   $scope.sendSMS = function(number) {
+                           
+                          window.plugins.socialsharing
+                          .shareViaSMS('',number)
+            
+               
+                       }
                   }
-                })
+                });
+             }
+               
+           
 
-           })
-
-               $scope.sendSMS = function(number) {
-                   
-                  window.plugins.socialsharing
-                  .shareViaSMS('',number)
-    
-       
-               }
+              
 
 
 
@@ -670,9 +1014,11 @@ function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, 
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
+  $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
     var user="";
     var No=$stateParams.term;
-    var url="http://127.0.0.1/IDonate/server/notification.php?no="+No;
+    
+    var url="http://idonate.000webhostapp.com/server/notification.php?no="+No;
             $http.get(url).success(
             function(response){
              $scope.items=response;
@@ -744,14 +1090,19 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
 
              confirmPopup.then(function(res) {
                if(res) {
+                
+                
+                
 
                       $.ajax({
                         type:"POST",
-                        url:"http://127.0.0.1/IDonate/server/accept.php",
+                        url:"http://idonate.000webhostapp.com/server/accept.php",
                         data:{no:No},
                         cache:false,
                         success:function(result){
-                          if(result=="Done"){$state.go('notification',{'term':user}, { reload: true });}
+      
+
+                          if(result=="Done"){$state.go('notification',{'user':user}, { reload: true });}
                           else{$state.go('bloodRequestnot',{'term':No});}
 
 
@@ -806,3 +1157,52 @@ function ($scope, $stateParams) {
 
 
 }])
+.controller('SignInCtrl', function($scope, SignInService, $ionicPopup, $state) {
+    $scope.loadsignup = function() {
+        $state.go('signup');
+    }
+    $scope.data = {};
+    $scope.login = function() {
+  if($scope.data.username == undefined || $scope.data.mobilenumber == undefined){
+    var alertPopup = $ionicPopup.alert({
+        title: 'Reqired!',
+        template: 'Please enter your credentials!'
+    });
+  }else{
+    SignInService.login($scope.data.username, $scope.data.mobilenumber).success(function(data) {
+        var user=data;
+        $state.go('iDonate2', {user:user});
+    }).error(function(data) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Login failed!',
+            template: 'Please check your credentials!'
+        });
+    });
+  }
+    }
+})
+
+.controller('SignUpCtrl', function($scope, SignUpService, $ionicPopup, $state) {
+    $scope.data = {};
+    $scope.register = function() {
+  if($scope.data.username == undefined || $scope.data.mobilenumber == undefined || $scope.data.firstname == undefined || $scope.data.lastname == undefined){
+    var alertPopup = $ionicPopup.alert({
+        title: 'Reqired!',
+        template: 'Please fill in all fields!'
+    });
+  }else{
+    SignUpService.register($scope.data.username, $scope.data.mobilenumber,$scope.data.firstname,$scope.data.lastname).success(function(data) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Registration Successful!',
+            template: data
+        });
+        $state.go('signin');
+    }).error(function(data) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Registration Unsuccessful!',
+            template: 'There is an account already registered with same credentials!'
+        });
+    });
+  }
+    }
+})

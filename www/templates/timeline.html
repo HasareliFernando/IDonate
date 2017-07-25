@@ -1,4 +1,4 @@
-<ion-view title="Timeline" id="page7" style="background-color: rgb(254, 253, 254);">
+<ion-view title="Timeline" id="page7" style="background-color: rgb(254, 253, 254);" class="Homepage">
   <ion-nav-buttons side="right" class="has-header">
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
@@ -9,17 +9,43 @@
         <input placeholder="Search with area" type="search">
       </label>
     </form>
-    <a ui-sref="addPost" id="timeline-button44" class="button button-assertive button-block icon-left ion-android-add post">Add Post</a>
-    <div class="list card" id="timeline-card23">
+    <a ui-sref="addPost({user: username})" id="timeline-button44" class="button button-assertive button-block icon-left ion-android-add post">Add Post</a>
+    <div class="list card" id="timeline-card23" ng-repeat="accs in acc.info">
       <ion-item class="item-avatar  item" id="timeline-list-item15" style="">
-        <h2>Item</h2>
+      <div class="row" style=""> 
+      <div class="col col-50">
+        <h2>{{accs.user_id}}</h2>
+      </div>
+      <div class="col col-50">
+        <h2>{{accs.date}}</h2>
+      </div>
+      </div>
       </ion-item>
       <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
         <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
       </div>
       <div class="item item-body" id="timeline-list-item-container6" style="">
         <div id="timeline-markdown6" class="show-list-numbers-and-dots conentpost">
-          <p style="margin-top:0px;color:#000000;">content</p>
+         <div class="row" style=""> 
+          <div class="col col-50">
+          <p style="margin-top:0px;color:#000000;">Time From:  {{accs.timef}}</p>
+          </div>
+          <div class="col col-50">
+          <p style="margin-top:0px;color:#000000;">Time To:  {{accs.timet}}</p>
+          </div>
+          </div>
+          <div class="row" style=""> 
+          <div class="col col-50">
+          <p style="margin-top:0px;color:#000000;">Contact:  {{accs.contact}}</p>
+          </div>
+          <div class="col col-50">
+          <p style="margin-top:0px;color:#000000;">Vanue:  {{accs.vanue}}</p>
+          </div>
+          </div>
+
+          
+          <p style="margin-top:0px;color:#000000;">{{accs.description}}</p>
+
         </div>
       </div>
     </div>

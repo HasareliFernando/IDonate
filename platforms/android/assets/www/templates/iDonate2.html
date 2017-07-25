@@ -1,39 +1,41 @@
-<ion-view title="" id="page5" style="background-color: rgb(253, 253, 245);" class="Homepage">
+<ion-view title="{{username}}" id="page5" style="background-color: rgb(253, 253, 245);" class="Homepage">
   <ion-nav-buttons side="right" class="has-header">
  
     <button  class="button button-icon icon ion-android-contact " style="color:#FFFFFF;" ></button>
-    <button   class="button  button-icon icon ion-android-notifications " id="notification"  ng-click="scheduleSingleNotification()" ng-click="setBadge(5)" style="color:#FFFFFF;"></button>
+    <button   class="button  button-icon icon ion-android-notifications " id="notification"  ng-click="Notification()"  style="color:#FFFFFF;"><span class="badge badge-assertive">{{badge}}</span></button>
     <button class="button button-icon icon ion-android-menu" style="color:#FFFFFF;"></button>
 
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     
     
-    <div class="row" style=""> 
+    <div class="row" style="height: 160px;"> 
       <div class="col col-50">
-        <a ui-sref="timeline" id="iDonate2-button17" style="font-weight:600;font-size: 20px;min-height: 130px;color:#FFFFFF;" class="button button-assertive button-block button-outline"> 
-        Timeline<br><i class="ion-compose timeline" style="font-weight:600;font-size: 25px;"></i></a>
+        <a ui-sref="timeline({user: username})" id="iDonate2-button17" style="font-weight:600;font-size: 15px;min-height: 130px;color:#FFFFFF;" class="button button-assertive button-block"><i class="ion-compose timeline" style="font-weight:600;font-size: 45px;"></i> 
+        <br>Timeline</a>
 
       </div>
       <div class="col col-50">
-      <a ui-sref="bloodRequest" id="iDonate2-button18" style="font-weight:600;color:#FFFFFF;font-size: 20px;min-height: 130px" class="button button-assertive  button-block button-outline">
-      Send Request<br><i class="ion-email request" style="font-weight:600;font-size: 25px;"></i></a>
+      <a ui-sref="bloodRequest({user: username})" id="iDonate2-button18" style="font-weight:600;color:#FFFFFF;font-size: 15px;min-height: 130px" class="button button-assertive  button-block "><i class="ion-android-drafts request" style="font-weight:600;font-size: 45px;"></i>
+      <br>Blood Request</a>
       </div>
     </div>
-    <div class="row"> 
+    
+    <div class="row" style="height: 150px"> 
       <div class="col col-50">
-        <a ui-sref="searchBloodBank" id="iDonate2-button27" style="font-weight:600;color:#FFFFFF;font-size: 20px;min-height: 130px" class="button button-assertive  button-block button-outline">Blood Bank<br><i class="ion-ios-location bloodbank" style="font-weight:600;font-size: 25px;"></i></a>
+        <a ui-sref="searchBloodBank({user: username})" id="iDonate2-button27" style="font-weight:600;color:#FFFFFF;font-size: 15px;min-height: 130px" class="button button-assertive  button-block "><i class="ion-ios-location bloodbank" style="font-weight:600;font-size: 45px;"></i><br>Blood Bank</a>
       </div>
       <div class="col col-50">
-        <a ui-sref="reportUser" id="iDonate2-button38" style="font-weight:600;color:#FFFFFF;font-size: 20px;min-height: 130px" class="button button-assertive  button-block button-outline">Report<br><i class="ion-android-apps bloodbank" style="font-weight:600;font-size: 25px;"></i></a>
+        <a ui-sref="reportUser({user: username})" id="iDonate2-button38" style="font-weight:600;color:#FFFFFF;font-size: 15px;min-height: 130px" class="button button-assertive  button-block "><i class="ion-thumbsdown bloodbank" style="font-weight:600;font-size: 45px;"></i><br>Report</a>
       </div>
     </div>
-    <div class="row"> 
+    
+    <div class="row" style="max-height: 160px"> 
       <div class="col col-50">
-        <a ui-sref="canDonate" id="iDonate2-button28" style="font-weight:600;color:#FFFFFF;font-size: 15px;min-height: 130px" class="button button-assertive  button-block button-outline">Blood Compatibility<br><i class="ion-waterdrop compatibility" style="font-weight:600;font-size: 25px;"></i></a>
+        <a ui-sref="canDonate({user: username})" id="iDonate2-button28" style="font-weight:600;color:#FFFFFF;font-size: 15px;min-height: 130px" class="button button-assertive  button-block "><i class="ion-waterdrop compatibility" style="font-weight:600;font-size: 45px;"></i><br>Blood Compatibility</a>
       </div>
       <div class="col col-50">
-        <a ui-sref="addAsDonor3" id="iDonate2-button39" style="font-weight:600;color:#FFFFFF;font-size: 20px;min-height: 130px" class="button button-assertive  button-block button-outline">Add as Donor<br><i class="ion-android-person-add donor" style="font-weight:600;font-size: 25px;"></i></a>
+        <a ui-sref="addAsDonor3({user: username})" id="iDonate2-button39" style="font-weight:600;color:#FFFFFF;font-size: 15px;min-height: 130px" class="button button-assertive  button-block "><i class="ion-android-person-add donor" style="font-weight:600;font-size: 45px;"></i><br>Add as Donor</a>
       </div>
     </div>
   </ion-content>

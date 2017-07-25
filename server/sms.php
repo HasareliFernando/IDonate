@@ -3,11 +3,11 @@
 	$user=$_POST['user_id'];
 	$phone='';
 
-	$sql ="SELECT * FROM donor WHERE user_id='$user' ";
+	$sql ="SELECT * FROM general_user WHERE user_id='$user' ";
 	$query=$conn->query($sql);
 	if($query->num_rows >0){
 		while($row=$query->fetch_array()){
-			$phone=$row['Phone'];
+			$phone=$row['telephone'];
 			
 
 		}
