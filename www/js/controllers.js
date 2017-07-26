@@ -37,8 +37,8 @@ function ($scope,$state, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLoc
     $scope.username=$stateParams.user;
     var user=$scope.username;
 
-      var url3="http://127.0.0.1/idonate/server/countnotification.php?user="+user;
-      var url4="http://127.0.0.1/idonate/server/countnotification2.php?user="+user;
+      var url3="http://idonate.000webhostapp.com/server/countnotification.php?user="+user;
+      var url4="http://idonate.000webhostapp.com/server/countnotification2.php?user="+user;
 
        $timeout(function(){
         $http.get(url3).success(
@@ -99,7 +99,7 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state,$ionicPopup) {
 $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
-  $http.get("http://127.0.0.1/idonate/server/getPost.php").success(
+  $http.get("http://idonate.000webhostapp.com/server/getPost.php").success(
       function(response){
         $scope.acc=response;
       });
@@ -204,7 +204,7 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialS
 
                      $.ajax({
                       type:"POST",
-                      url:"http://127.0.0.1/idonate/server/bloodRequest.php",
+                      url:"http://idonate.000webhostapp.com/server/bloodRequest.php",
                       data:{userid:$scope.user,bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
                       cache:false,
                       success:function(result){
@@ -271,7 +271,7 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$ionicHistory) 
              confirmPopup.then(function(res) {
                 $.ajax({
                       type:"POST",
-                      url:"http://127.0.0.1/idonate/server/addPost.php",
+                      url:"http://idonate.000webhostapp.com/server/addPost.php",
                       data:{user:$stateParams.user,input_vanue:vanue,input_date:date,input_timeF:time_f,input_timeT:time_t,input_desc:description,input_contact:contact},
                       cache:false,
                       success:function(result){
@@ -472,7 +472,7 @@ function  pathForImage(image) {
 
 $scope.uploadImage = function() {
   // Destination URL
-  var url = "http://127.0.0.1/idonate/server/upload.php";
+  var url = "http://idonate.000webhostapp.com/server/upload.php";
  
   // File for Upload
   var targetPath = $scope.pathForImage($scope.image);
@@ -668,7 +668,7 @@ function ($scope,$state, $stateParams,$cordovaGeolocation,$http,$state,$ionicPop
 
 				$.ajax({
           type:"POST",
-          url:"http://127.0.0.1/idonate/server/addAsDonor.php",
+          url:"http://idonate.000webhostapp.com/server/addAsDonor.php",
           data:{user:userid,addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood,Location:lat,Location2:lng},
           cache:false,
           success:function(result){
@@ -726,7 +726,7 @@ function ($scope, $stateParams,$state) {
 
         $.ajax({
           type:"POST",
-          url:"http://127.0.0.1/idonate/server/addAsDonor2.php",
+          url:"http://idonate.000webhostapp.com/server/addAsDonor2.php",
           data:{addAsDonor2_input35:date,addAsDonor2_input36:no,Nic:nic},
           cache:false,
           success:function(result){
@@ -793,6 +793,7 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  $scope.map=true;
 	var srilanka = {lat: 7.20, lng: 80.7718};
   var point70={lat: 6.8667, lng: 79.8762};
   var point71={lat: 6.9102, lng: 79.8848};
@@ -856,6 +857,14 @@ function ($scope, $stateParams) {
         Eastern:false,
         Central:false
        }   
+       
+       $scope.search=function(){
+        $scope.map=false;
+       }
+       $scope.back=function(){
+        $scope.map=true;
+       }
+
 
         // Create a marker and set its position.
         $scope.Change=function(){
@@ -1282,6 +1291,8 @@ function ($scope, $stateParams) {
         
         
         $scope.map=new google.maps.Map(document.getElementById("map"),mapOption);
+
+
         
         
 
@@ -1341,8 +1352,8 @@ function($scope,$state,$stateParams,$http, $ionicPlatform, $cordovaBadge,$timeou
     $scope.user=$stateParams.user;
 
       var user_id=$stateParams.term;
-      var url="http://127.0.0.1/idonate/server/getNotification.php?user="+user_id;
-      var url2="http://127.0.0.1/idonate/server/getNotification2.php?user="+user_id;
+      var url="http://idonate.000webhostapp.com/server/getNotification.php?user="+user_id;
+      var url2="http://idonate.000webhostapp.com/server/getNotification2.php?user="+user_id;
      
 
      
@@ -1418,7 +1429,7 @@ function($scope,$state,$stateParams,$http, $ionicPlatform, $cordovaBadge,$timeou
   $scope.undo = function (no) {
      $.ajax({
                 type:"POST",
-                url:"http://127.0.0.1/idonate/server/undo.php",
+                url:"http://idonate.000webhostapp.com/server/undo.php",
                 data:{No:no},
                 cache:false,
                 success:function(result){
@@ -1451,7 +1462,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, 
              $scope.getnum=function(){
                $.ajax({
                 type:"POST",
-                url:"http://127.0.0.1/idonate/server/sms.php",
+                url:"http://idonate.000webhostapp.com/server/sms.php",
                 data:{user_id:$scope.user},
                 cache:false,
                 success:function(result){
@@ -1488,7 +1499,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
     var user="";
     var No=$stateParams.term;
     
-    var url="http://127.0.0.1/idonate/server/notification.php?no="+No;
+    var url="http://idonate.000webhostapp.com/server/notification.php?no="+No;
             $http.get(url).success(
             function(response){
              $scope.items=response;
@@ -1566,7 +1577,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
 
                       $.ajax({
                         type:"POST",
-                        url:"http://127.0.0.1/idonate/server/accept.php",
+                        url:"http://idonate.000webhostapp.com/server/accept.php",
                         data:{no:No},
                         cache:false,
                         success:function(result){

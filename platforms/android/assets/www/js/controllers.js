@@ -793,36 +793,48 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-	var srilanka = {lat: 7.20, lng: 80.7718};var point1={lat: 7.2276, lng: 81.8510};var point2={lat: 7.3017, lng: 81.6747};var point3={lat: 7.6729, lng: 81.0433};
-  var point4={lat: 7.4204, lng: 81.8229};var point5={lat: 7.4204, lng: 81.8229};var point6={lat: 7.5311, lng: 81.3552};var point7={lat: 7.3683, lng: 81.8130};
-  var point8={lat: 8.3247, lng: 80.4139};var point9={lat: 8.1431, lng: 80.9669};var point10={lat: 8.8341, lng: 80.7607};var point11={lat:7.9432, lng: 81.0095};
-  var point12={lat: 8.1537, lng: 80.2936};var point13={lat: 6.9918, lng: 81.0523};var point14={lat: 7.1636, lng: 81.2259};
-  var point15={lat: 6.8055, lng: 80.9563};var point16={lat: 7.3254, lng: 80.9909};var point17={lat: 6.8913, lng: 81.3425};
-  var point18={lat: 6.9089, lng: 80.9091};var point19={lat: 6.7313, lng: 81.0986};var point20={lat: 7.4204, lng: 81.8229};
-  var point21={lat: 7.9111, lng: 81.5326};var point22={lat: 6.9570, lng: 80.2073};var point23={lat: 6.9570, lng: 80.2073};
-  var point24={lat: 6.8479, lng: 79.9916};var point25={lat: 7.0245, lng: 80.2617};var point26={lat: 7.5723, lng: 79.7973};
-  var point27={lat: 7.0284, lng: 79.9235};var point28={lat: 7.0913, lng: 80.0007};var point29={lat:8.2355, lng: 79.7669};
-  var point30={lat: 7.3934, lng: 79.8321};var point31={lat: 7.2124, lng: 79.8483};
-  var point32={lat: 8.0279, lng: 79.8387};var point33={lat: 7.1235, lng: 80.1097};var point34={lat: 7.0248, lng: 79.9035};
-  var point35={lat: 9.6656, lng: 80.0161};var point36={lat: 9.3727, lng:80.4116};var point37={lat: 9.2603, lng: 80.7666};
-  var point38={lat: 9.8056, lng: 80.2247};var point39={lat: 9.7853, lng: 80.0391};var point40={lat:6.7106, lng: 80.0665};
-  var point41={lat: 6.5632, lng: 79.9852};var point42={lat: 6.7153, lng: 79.9086};var point43={lat: 6.7215, lng: 79.9068};
-  var point44={lat: 6.1275, lng: 81.1221};var point45={lat:5.9511, lng: 80.4959};var point46={lat:6.09575, lng: 80.5645};
-  var point47={lat:5.9479, lng: 80.5497};var point48={lat: 6.0227, lng: 80.7974};var point49={lat: 6.2855, lng: 81.2685};
-  var point50={lat:7.8726, lng: 80.6506};var point51={lat: 6.8549, lng: 80.6002};var point52={lat: 7.1561, lng: 80.5650};
-  var point53={lat: 7.2863, lng: 80.6316};var point54={lat: 7.2474, lng:80.3455};var point55={lat: 7.4610, lng: 80.6247};
-  var point56={lat: 7.2535, lng: 80.4461};var point57={lat: 7.0530, lng: 80.5351};var point58={lat: 6.9741, lng: 80.7801};
-  var point59={lat: 7.2662, lng: 80.5976};var point60={lat: 7.1453, lng: 80.7825};var point61={lat: 7.2252, lng: 80.1960};
-  var point62={lat: 6.2606, lng: 80.0382};var point63={lat: 6.2938, lng: 80.1643};var point64={lat: 6.0667, lng:80.2260};
-  var point65={lat:6.0386, lng: 80.2057};var point66={lat: 7.3484, lng: 80.1375};var point67={lat: 7.4720, lng: 80.0446};
-  var point68={lat: 7.4790, lng: 80.3591};var point69={lat: 7.7474, lng: 80.1144};var point70={lat: 6.8667, lng: 79.8762};
-  var point71={lat: 6.9102, lng: 79.8848};var point72={lat: 6.8948, lng: 79.8581};var point73={lat: 6.9198, lng: 79.8702};
-  var point74={lat: 6.9224, lng:79.9202};var point75={lat: 6.9224, lng: 79.9202};var point76={lat: 6.9260, lng: 79.9437};
-  var point77={lat:6.9260, lng: 79.9437};var point78={lat: 6.9177, lng: 79.8663};var point79={lat: 6.8684, lng: 79.9252};
-  var point80={lat: 6.6582, lng: 80.7124};var point81={lat: 6.3258, lng: 6.3258};var point82={lat: 6.5788, lng: 80.5744};
-  var point83={lat:6.6871, lng: 80.3913};var point84={lat:8.3666, lng: 81.0047};var point85={lat: 8.5015, lng: 81.1875};
-  var point86={lat: 8.4545, lng: 81.2630};var point87={lat: 8.5648, lng: 81.2630};var point88={lat: 8.5648, lng: 81.2630};
-  var point89={lat: 8.9828, lng: 79.9035};var point90={lat: 8.7606, lng: 80.4999};
+  $scope.map=true;
+	var srilanka = {lat: 7.20, lng: 80.7718};
+  var point70={lat: 6.8667, lng: 79.8762};
+  var point71={lat: 6.9102, lng: 79.8848};
+  var point72={lat: 6.8948, lng: 79.8581};
+  var point73={lat: 6.9198, lng: 79.8702};
+  var point74={lat: 6.9224, lng:79.9202};
+  var point75={lat: 6.9224, lng: 79.9202};
+  var point76={lat: 6.9260, lng: 79.9437};
+  var point77={lat:6.9260, lng: 79.9437};
+  var point78={lat: 6.9177, lng: 79.8663};
+  var point79={lat: 6.8684, lng: 79.9252};
+  var point1={lat: 7.2276, lng: 81.8510};
+  var point2={lat: 7.3017, lng: 81.6747};
+  var point3={lat: 7.6729, lng: 81.0433};
+  var point4={lat: 7.4204, lng: 81.8229};
+  var point5={lat: 7.4204, lng: 81.8229};
+  var point6={lat: 7.5311, lng: 81.3552};
+  var point7={lat: 7.3683, lng: 81.8130};
+  var point8={lat: 8.3247, lng: 80.4139};
+  var point9={lat: 8.1431, lng: 80.9669};
+  var point10={lat: 8.8341, lng: 80.7607};
+  var point11={lat:7.9432, lng: 81.0095};
+  var point12={lat: 8.1537, lng: 80.2936};
+  var point13={lat: 6.9918, lng: 81.0523};
+  var point14={lat: 7.1636, lng: 81.2259};
+  var point15={lat: 6.8055, lng: 80.9563};
+  var point16={lat: 7.3254, lng: 80.9909};
+  var point17={lat: 6.8913, lng: 81.3425};
+  var point18={lat: 6.9089, lng: 80.9091};
+  var point19={lat: 6.7313, lng: 81.0986};
+  var point80={lat: 6.6582, lng: 80.7124};
+  var point81={lat: 6.3258, lng: 6.3258};
+  var point82={lat: 6.5788, lng: 80.5744};
+  var point83={lat:6.6871, lng: 80.3913};
+  var point64={lat: 6.0667, lng:80.2260};
+  var point68={lat: 7.4790, lng: 80.3591};
+  var point35={lat: 9.6656, lng: 80.0161};
+
+
+  
+
   var marker1=null;var marker3=null;var marker5=null;var marker7=null;var marker9=null;var marker82=null;var marker84=null;var marker86=null;
   var marker2=null;var marker4=null;var marker6=null;var marker8=null;var marker81=null;var marker83=null;var marker85=null;var marker16=null;
   var marker71=null;var marker72=null;var marker73=null;var marker74=null;var marker21=null;var marker22=null;var marker23=null;var marker17=null;
@@ -845,6 +857,14 @@ function ($scope, $stateParams) {
         Eastern:false,
         Central:false
        }   
+       
+       $scope.search=function(){
+        $scope.map=false;
+       }
+       $scope.back=function(){
+        $scope.map=true;
+       }
+
 
         // Create a marker and set its position.
         $scope.Change=function(){
@@ -1271,6 +1291,10 @@ function ($scope, $stateParams) {
         
         
         $scope.map=new google.maps.Map(document.getElementById("map"),mapOption);
+
+
+        
+        
 
 
 }])
