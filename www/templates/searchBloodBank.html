@@ -3,6 +3,97 @@
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header" ng-controller="MapController">
-    <div id="map" data-tab-disabled="true"></div>
+<ul class = "list" >
+   <li class = "item item-toggle">
+      Western
+      <label class = "toggle  toggle-light">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Western"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      Uva
+      <label class = "toggle toggle-stable">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Uva"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+     Southern
+      <label class = "toggle toggle-positive">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Southern" />
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      Sabaragamuwa
+      <label class = "toggle toggle-calm">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Sabaragamuwa" />
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      North_Western
+      <label class = "toggle toggle-balanced">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.North_Western"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      Northern
+      <label class = "toggle toggle-energized">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Northern"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      North_Central
+      <label class = "toggle toggle-assertive">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.North_Central"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      Eastern
+      <label class = "toggle  toggle-royal">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Eastern"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+
+   <li class = "item item-toggle">
+      Central
+      <label class = "toggle toggle-dark">
+         <input type = "checkbox" ng-change="Change()" ng-model="toggleModel.Central"/>
+         <div class = "track">
+            <div class = "handle"></div>
+         </div>
+      </label>
+   </li>
+</ul>
+ <div id="map" style="width:90%;height:170px;margin-left: 10px;"></div>
   </ion-content>
 </ion-view>

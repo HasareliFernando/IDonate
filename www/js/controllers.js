@@ -37,8 +37,8 @@ function ($scope,$state, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLoc
     $scope.username=$stateParams.user;
     var user=$scope.username;
 
-      var url3="http://idonate.000webhostapp.com/server/countnotification.php?user="+user;
-      var url4="http://idonate.000webhostapp.com/server/countnotification2.php?user="+user;
+      var url3="http://127.0.0.1/idonate/server/countnotification.php?user="+user;
+      var url4="http://127.0.0.1/idonate/server/countnotification2.php?user="+user;
 
        $timeout(function(){
         $http.get(url3).success(
@@ -99,7 +99,7 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$state,$ionicPopup) {
 $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
-  $http.get("http://idonate.000webhostapp.com/server/getPost.php").success(
+  $http.get("http://127.0.0.1/idonate/server/getPost.php").success(
       function(response){
         $scope.acc=response;
       });
@@ -204,7 +204,7 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$cordovaSocialS
 
                      $.ajax({
                       type:"POST",
-                      url:"http://idonate.000webhostapp.com/server/bloodRequest.php",
+                      url:"http://127.0.0.1/idonate/server/bloodRequest.php",
                       data:{userid:$scope.user,bloodRequest_select1:group,bloodRequest_select2:type,Location:lat,Location2:lng},
                       cache:false,
                       success:function(result){
@@ -271,7 +271,7 @@ function ($scope, $stateParams,$http,$state,$ionicPopup,$timeout,$ionicHistory) 
              confirmPopup.then(function(res) {
                 $.ajax({
                       type:"POST",
-                      url:"http://idonate.000webhostapp.com/server/addPost.php",
+                      url:"http://127.0.0.1/idonate/server/addPost.php",
                       data:{user:$stateParams.user,input_vanue:vanue,input_date:date,input_timeF:time_f,input_timeT:time_t,input_desc:description,input_contact:contact},
                       cache:false,
                       success:function(result){
@@ -472,7 +472,7 @@ function  pathForImage(image) {
 
 $scope.uploadImage = function() {
   // Destination URL
-  var url = "http://idonate.000webhostapp.com/server/upload.php";
+  var url = "http://127.0.0.1/idonate/server/upload.php";
  
   // File for Upload
   var targetPath = $scope.pathForImage($scope.image);
@@ -668,7 +668,7 @@ function ($scope,$state, $stateParams,$cordovaGeolocation,$http,$state,$ionicPop
 
 				$.ajax({
           type:"POST",
-          url:"http://idonate.000webhostapp.com/server/addAsDonor.php",
+          url:"http://127.0.0.1/idonate/server/addAsDonor.php",
           data:{user:userid,addAsDonorInput31:nic,addAsDonor_select2:gender,addAsDonor_select3:blood,Location:lat,Location2:lng},
           cache:false,
           success:function(result){
@@ -726,7 +726,7 @@ function ($scope, $stateParams,$state) {
 
         $.ajax({
           type:"POST",
-          url:"http://idonate.000webhostapp.com/server/addAsDonor2.php",
+          url:"http://127.0.0.1/idonate/server/addAsDonor2.php",
           data:{addAsDonor2_input35:date,addAsDonor2_input36:no,Nic:nic},
           cache:false,
           success:function(result){
@@ -794,26 +794,496 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 	var srilanka = {lat: 7.20, lng: 80.7718};
-  var point={lat: 8.3114, lng: 80.4037};
-  var point2={lat: 6.9271, lng: 79.8612};
+  var point70={lat: 6.8667, lng: 79.8762};
+  var point71={lat: 6.9102, lng: 79.8848};
+  var point72={lat: 6.8948, lng: 79.8581};
+  var point73={lat: 6.9198, lng: 79.8702};
+  var point74={lat: 6.9224, lng:79.9202};
+  var point75={lat: 6.9224, lng: 79.9202};
+  var point76={lat: 6.9260, lng: 79.9437};
+  var point77={lat:6.9260, lng: 79.9437};
+  var point78={lat: 6.9177, lng: 79.8663};
+  var point79={lat: 6.8684, lng: 79.9252};
+  var point1={lat: 7.2276, lng: 81.8510};
+  var point2={lat: 7.3017, lng: 81.6747};
+  var point3={lat: 7.6729, lng: 81.0433};
+  var point4={lat: 7.4204, lng: 81.8229};
+  var point5={lat: 7.4204, lng: 81.8229};
+  var point6={lat: 7.5311, lng: 81.3552};
+  var point7={lat: 7.3683, lng: 81.8130};
+  var point8={lat: 8.3247, lng: 80.4139};
+  var point9={lat: 8.1431, lng: 80.9669};
+  var point10={lat: 8.8341, lng: 80.7607};
+  var point11={lat:7.9432, lng: 81.0095};
+  var point12={lat: 8.1537, lng: 80.2936};
+  var point13={lat: 6.9918, lng: 81.0523};
+  var point14={lat: 7.1636, lng: 81.2259};
+  var point15={lat: 6.8055, lng: 80.9563};
+  var point16={lat: 7.3254, lng: 80.9909};
+  var point17={lat: 6.8913, lng: 81.3425};
+  var point18={lat: 6.9089, lng: 80.9091};
+  var point19={lat: 6.7313, lng: 81.0986};
+  var point80={lat: 6.6582, lng: 80.7124};
+  var point81={lat: 6.3258, lng: 6.3258};
+  var point82={lat: 6.5788, lng: 80.5744};
+  var point83={lat:6.6871, lng: 80.3913};
+  var point64={lat: 6.0667, lng:80.2260};
+  var point68={lat: 7.4790, lng: 80.3591};
+  var point35={lat: 9.6656, lng: 80.0161};
+
+
+  
+
+  var marker1=null;var marker3=null;var marker5=null;var marker7=null;var marker9=null;var marker82=null;var marker84=null;var marker86=null;
+  var marker2=null;var marker4=null;var marker6=null;var marker8=null;var marker81=null;var marker83=null;var marker85=null;var marker16=null;
+  var marker71=null;var marker72=null;var marker73=null;var marker74=null;var marker21=null;var marker22=null;var marker23=null;var marker17=null;
+  var marker24=null;var marker25=null;var marker26=null;var marker12=null;var marker13=null;var marker14=null;var marker15=null;var marker18=null;
+  var marker41=null;var marker42=null;var marker43=null;
         // Create a map object and specify the DOM element for display.
         var mapOption = new google.maps.Map(document.getElementById('map'), {
           center: srilanka,
           scrollwheel: false,
-          zoom: 7
+          zoom: 7.5
         });
+        $scope.toggleModel={
+        Western:false,
+        Uva:false,
+        Southern:false,
+        Sabaragamuwa:false,
+        North_Western:false,
+        Northern:false,
+        North_Central:false,
+        Eastern:false,
+        Central:false
+       }   
+
         // Create a marker and set its position.
-        var marker = new google.maps.Marker({
-          map: mapOption,
-          position: point,
-          title: 'Hello World!'
-        });
-        var marker2 = new google.maps.Marker({
-          map: mapOption,
-          position: point2,
-          title: 'Hello World!'
-        });
+        $scope.Change=function(){
+          
+        if($scope.toggleModel.Western==true){
+                marker1= new google.maps.Marker({
+                map: mapOption,
+                position: point70,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'Accident serv'
+              });
+                marker11= new google.maps.Marker({
+                map: mapOption,
+                position: point71,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'Castle Street Hospital for Women'
+              });
+                marker12= new google.maps.Marker({
+                map: mapOption,
+                position: point72,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'Colombo South Teaching Hospital-Kalubowila'
+              });
+                marker13= new google.maps.Marker({
+                map: mapOption,
+                position: point73,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'De Soysa Hospital for women'
+              });
+                marker14= new google.maps.Marker({
+                map: mapOption,
+                position: point74,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'IDH Hospital-Angoda'
+              });
+                marker15= new google.maps.Marker({
+                map: mapOption,
+                position: point75,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'LHR'
+              });
+                marker16= new google.maps.Marker({
+                map: mapOption,
+                position: point76,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'Mulleriyawa'
+              });
+                marker17= new google.maps.Marker({
+                map: mapOption,
+                position: point78,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'National Hospital of Sri Lanka'
+              });
+                marker18= new google.maps.Marker({
+                map: mapOption,
+                position: point79,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Teal",
+                    scale: 3
+                },
+                title: 'Sri Jayawardenepura General Hospital-Kotte'
+              });
+          $scope.Western=1;
+        }else if($scope.Western==1){
+          marker1.setMap(null);marker11.setMap(null);marker12.setMap(null);marker13.setMap(null);marker14.setMap(null);marker15.setMap(null);marker16.setMap(null);marker17.setMap(null);marker18.setMap(null);
+        }else{
+
+        }
+        if($scope.toggleModel.Uva==true){
+          marker2 = new google.maps.Marker({
+                map: mapOption,
+                position: point13,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Badulla'
+              });
+          marker21 = new google.maps.Marker({
+                map: mapOption,
+                position: point14,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Bibila'
+              });
+          marker22 = new google.maps.Marker({
+                map: mapOption,
+                position: point15,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Diyatalawa'
+              });
+          marker23 = new google.maps.Marker({
+                map: mapOption,
+                position: point16,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Mahiyanganaya'
+              });
+          marker24 = new google.maps.Marker({
+                map: mapOption,
+                position: point17,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Monaragala'
+              });
+          marker25 = new google.maps.Marker({
+                map: mapOption,
+                position: point18,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Welimada'
+              });
+          marker26 = new google.maps.Marker({
+                map: mapOption,
+                position: point19,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Gray",
+                    scale: 3
+                },
+                title: 'Wallawaya'
+              });
+          
+          $scope.Uva=1;
+        }else if($scope.Uva==1){
+          marker2.setMap(null);marker21.setMap(null);marker22.setMap(null);marker23.setMap(null);marker24.setMap(null);marker25.setMap(null);marker26.setMap(null);
+        }else{
+        }
+        if($scope.toggleModel.Southern==true){
+          marker3 = new google.maps.Marker({
+                map: mapOption,
+                position: point64,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Blue",
+                    scale: 3
+                },
+                title: 'Karapitiya'
+              });
+          $scope.Southern=1;
+        }else if($scope.Southern==1){
+          marker3.setMap(null);
+        }else{
+        }
+        if($scope.toggleModel.Sabaragamuwa==true){
+          marker4 = new google.maps.Marker({
+                map: mapOption,
+                position: point80,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Aqua",
+                    scale: 3
+                },
+                title: 'Balangoda'
+              });
+          marker41 = new google.maps.Marker({
+                map: mapOption,
+                position: point81,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Aqua",
+                    scale: 3
+                },
+                title: 'Embilipitiya'
+              });
+          marker42 = new google.maps.Marker({
+                map: mapOption,
+                position: point82,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Aqua",
+                    scale: 3
+                },
+                title: 'Kahawatta'
+              });
+          marker43 = new google.maps.Marker({
+                map: mapOption,
+                position: point83,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Aqua",
+                    scale: 3
+                },
+                title: 'Rathnapura'
+              });
+          $scope.Sabaragamuwa=1;
+        }else if($scope.Sabaragamuwa==1){
+          marker4.setMap(null);marker41.setMap(null);marker42.setMap(null);marker43.setMap(null);
+        }else{
+        }
+        if($scope.toggleModel.North_Western==true){
+          marker5 = new google.maps.Marker({
+                map: mapOption,
+                position: point68,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Lime",
+                    scale: 3
+                },
+                title: 'Kurunagala'
+              });
+          $scope.North_Western=1;
+        }else if($scope.North_Western==1){
+          marker5.setMap(null);
+        }else{
+        }
+        if($scope.toggleModel.Northern==true){
+          marker6 = new google.maps.Marker({
+                map: mapOption,
+                position: point35,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Yellow",
+                    scale: 3
+                },
+                title: 'Jaffna'
+              });
+          $scope.Northern=1;
+        }else if($scope.Northern==1){
+          marker6.setMap(null);
+        }else{
+        }
+        if($scope.toggleModel.North_Central==true){
+                marker7 = new google.maps.Marker({
+                map: mapOption,
+                position: point8,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "red",
+                    scale: 3
+                },
+                title: 'Anuradhapuraya'
+              });
+                marker71 = new google.maps.Marker({
+                map: mapOption,
+                position: point9,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "red",
+                    scale: 3
+                },
+                title: 'Madirigiriya'
+              });
+                marker72 = new google.maps.Marker({
+                map: mapOption,
+                position: point10,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "red",
+                    scale: 3
+                },
+                title: 'Padaviya'
+              });
+                marker73 = new google.maps.Marker({
+                map: mapOption,
+                position: point11,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "red",
+                    scale: 3
+                },
+                title: 'Polonnaruwa'
+              });
+                marker74 = new google.maps.Marker({
+                map: mapOption,
+                position: point12,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "red",
+                    scale: 3
+                },
+                title: 'Thabuttegama'
+              });
+                $scope.North_Central=1;
+        }else if($scope.North_Central==1){
+          marker7.setMap(null);marker71.setMap(null);marker72.setMap(null);marker73.setMap(null);marker74.setMap(null);
+        }else{
+
+        }
+        if($scope.toggleModel.Eastern==true){
+          marker8 = new google.maps.Marker({
+                map: mapOption,
+                position: point1,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Akkarepattuwa'
+              });
+          marker81 = new google.maps.Marker({
+                map: mapOption,
+                position: point2,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Ampara'
+              });
+          marker82 = new google.maps.Marker({
+                map: mapOption,
+                position: point3,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Dehiattakanndiya'
+              });
+          marker83 = new google.maps.Marker({
+                map: mapOption,
+                position: point4,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Kalmunei North'
+              });
+          marker84 = new google.maps.Marker({
+                map: mapOption,
+                position: point5,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Kalmunei South'
+              });
+          marker85 = new google.maps.Marker({
+                map: mapOption,
+                position: point6,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Mahaoya'
+              });
+          marker86 = new google.maps.Marker({
+                map: mapOption,
+                position: point7,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Purple",
+                    scale: 3
+                },
+                title: 'Smanthurai'
+              });
+          $scope.Eastern=1;
+        }else if($scope.Eastern==1){
+          marker8.setMap(null);marker81.setMap(null);marker82.setMap(null);marker83.setMap(null);marker84.setMap(null);marker85.setMap(null);marker86.setMap(null);
+        }else{
+        }
+        if($scope.toggleModel.Central==true){
+          marker9 = new google.maps.Marker({
+                map: mapOption,
+                position: point2,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    strokeColor: "Black",
+                    scale: 3
+                },
+                title: 'Hello World!'
+              });
+          $scope.Central=1;
+        }else if($scope.Central==1){
+          marker9.setMap(null);
+        }else{
+        }
+      }
+
+        
+        
         $scope.map=new google.maps.Map(document.getElementById("map"),mapOption);
+        
+        
 
 
 }])
@@ -871,8 +1341,8 @@ function($scope,$state,$stateParams,$http, $ionicPlatform, $cordovaBadge,$timeou
     $scope.user=$stateParams.user;
 
       var user_id=$stateParams.term;
-      var url="http://idonate.000webhostapp.com/server/getNotification.php?user="+user_id;
-      var url2="http://idonate.000webhostapp.com/server/getNotification2.php?user="+user_id;
+      var url="http://127.0.0.1/idonate/server/getNotification.php?user="+user_id;
+      var url2="http://127.0.0.1/idonate/server/getNotification2.php?user="+user_id;
      
 
      
@@ -948,7 +1418,7 @@ function($scope,$state,$stateParams,$http, $ionicPlatform, $cordovaBadge,$timeou
   $scope.undo = function (no) {
      $.ajax({
                 type:"POST",
-                url:"http://idonate.000webhostapp.com/server/undo.php",
+                url:"http://127.0.0.1/idonate/server/undo.php",
                 data:{No:no},
                 cache:false,
                 success:function(result){
@@ -981,7 +1451,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, 
              $scope.getnum=function(){
                $.ajax({
                 type:"POST",
-                url:"http://idonate.000webhostapp.com/server/sms.php",
+                url:"http://127.0.0.1/idonate/server/sms.php",
                 data:{user_id:$scope.user},
                 cache:false,
                 success:function(result){
@@ -1018,7 +1488,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
     var user="";
     var No=$stateParams.term;
     
-    var url="http://idonate.000webhostapp.com/server/notification.php?no="+No;
+    var url="http://127.0.0.1/idonate/server/notification.php?no="+No;
             $http.get(url).success(
             function(response){
              $scope.items=response;
@@ -1096,7 +1566,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup, $timeout) {
 
                       $.ajax({
                         type:"POST",
-                        url:"http://idonate.000webhostapp.com/server/accept.php",
+                        url:"http://127.0.0.1/idonate/server/accept.php",
                         data:{no:No},
                         cache:false,
                         success:function(result){

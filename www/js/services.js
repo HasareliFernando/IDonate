@@ -37,7 +37,7 @@ angular.module('app.services', [])
 
             $http({
               method: 'POST',
-              url:'http://idonate.000webhostapp.com/server/login.php',
+              url:'http://127.0.0.1/idonate/server/login.php',
               data: {username : encodeURIComponent(name), telephone : encodeURIComponent(pw)},
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function mySuccess(response) {
@@ -74,7 +74,7 @@ angular.module('app.services', [])
 
             $http({
               method: 'POST',
-              url:'http://idonate.000webhostapp.com/server/registration.php',
+              url:'http://127.0.0.1/idonate/server/registration.php',
               data: {username : encodeURIComponent(name), telephone : encodeURIComponent(tp), firstname : encodeURIComponent(fname), lastname : encodeURIComponent(lname)},
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function mySuccess(response) {
