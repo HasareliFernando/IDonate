@@ -844,7 +844,7 @@ function ($scope, $stateParams) {
         var mapOption = new google.maps.Map(document.getElementById('map'), {
           center: srilanka,
           scrollwheel: false,
-          zoom: 7.5
+          zoom: 7
         });
         $scope.toggleModel={
         Western:false,
@@ -861,9 +861,7 @@ function ($scope, $stateParams) {
        $scope.search=function(){
         $scope.map=false;
        }
-       $scope.back=function(){
-        $scope.map=true;
-       }
+       
 
 
         // Create a marker and set its position.
