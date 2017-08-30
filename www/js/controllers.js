@@ -36,6 +36,7 @@ function ($scope,$state, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLoc
   var num=0;
     $scope.username=$stateParams.user;
     var user=$scope.username;
+   
 
       var url3="http://idonate.000webhostapp.com/server/countnotification.php?user="+user;
       var url4="http://idonate.000webhostapp.com/server/countnotification2.php?user="+user;
@@ -61,6 +62,15 @@ function ($scope,$state, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLoc
       
        $scope.badge=num;
         }, 10);
+       $scope.Setting=function(){
+       
+        $state.go('settings',{'user':$scope.username});
+       }
+        $scope.profile=function(){
+       
+        $state.go('myProfile',{'user':$scope.username});
+       }
+       
        $scope.Notification = function() {
 
 
@@ -84,12 +94,58 @@ function ($scope,$state, $stateParams, $ionicPlatform, $cordovaBadge,$cordovaLoc
            }
 
 
+
+
 }])
 
-.controller('settingsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('settingsCtrl', ['$scope', '$stateParams','$http', '$state','$ionicPopup',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$state,$ionicPopup) {
+
+    var user_id=$stateParams.user;
+    var url="http://idonate.000webhostapp.com/server/userdetails.php?user="+user_id;
+    
+    $http.get(url).success(
+      function(response){
+        $scope.item=response;
+      });
+
+    $scope.remove=function(){
+               
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Confirm',
+               template: 'Do you want remove your donor account!'
+             });
+
+             confirmPopup.then(function(res) {
+               if(res) {
+
+                      $.ajax({
+                      type:"POST",
+                      url:"http://idonate.000webhostapp.com/server/removedonate.php",
+                      data:{user:$stateParams.user},
+                      cache:false,
+                      success:function(result){
+                        alert(result);
+                        $state.go('settings',{'user':user_id});
+
+                       
+                      }
+                 })
+
+
+               } else {
+                 console.log('You are not sure');
+               }
+             });
+           
+      
+             
+    }
+    $scope.logout=function(){
+      $state.go('signin');
+    }
  
 
 }])
@@ -472,7 +528,7 @@ function  pathForImage(image) {
 
 $scope.uploadImage = function() {
   // Destination URL
-  var url = "http://idonate.000webhostapp.com/server/upload.php";
+  var url = "http://idonate.000webhostapp.com/server/uploads.php";
  
   // File for Upload
   var targetPath = $scope.pathForImage($scope.image);
@@ -516,6 +572,24 @@ $scope.uploadImage = function() {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  $scope.user=$stateParams.user;
+   var userid=$('#reportUser-input27').val();
+  $('#reportUser-button19').click(function(){
+        $.ajax({
+          type:"POST",
+          url:"http://idonate.000webhostapp.com/server/rate.php",
+          data:{user:userid},
+          cache:false,
+          success:function(result){
+            alert(result);
+
+
+          }
+        })
+
+
+
+    });
 
 
 }])
@@ -693,7 +767,7 @@ function ($scope,$state, $stateParams,$cordovaGeolocation,$http,$state,$ionicPop
              });
 
              confirmPopup.then(function(res) {
-              $state.go('iDonate2');
+              $state.go('iDonate2',{'user':userid});
              });
            };
               
@@ -731,8 +805,8 @@ function ($scope, $stateParams,$state) {
           cache:false,
           success:function(result){
             alert(result);
-            if(result=="Done"){$state.go('iDonate2');}
-            else{$state.go('addAsDonor2');}
+            if(result=="Done"){$state.go('iDonate2'),{'user':userid};}
+            else{$state.go('addAsDonor2'),{'term':nic};}
 
 
           }
@@ -770,11 +844,160 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  $('#reminders-button14').click(function(){
+
+    var reminders_input1 = $('#reminder_input1').val();
+    var reminders_input2 = $('#reminder_input2').val();
+    var reminders_input3 = $('#reminder_input3').val();
+    var reminders_input4 = $('#reminder_select').val();
+    var reminders_input5 = $('#reminder_input4').val();
+    var reminders_input6 = $('#reminder_input5').val();
+
+    if(reminders_input1 == '' || reminders_input2 == '' || reminders_input3 == '' || reminders_input4 == '' || reminders_input5 == '' || reminders_input6 == ''){
+      alert('All fields are required');
+    }
+    else{
+      $.ajax({
+        type: "POST",
+        url:"http://idonate.000webhostapp.com/server/reminder.php",
+        data:{reminderInput1:reminders_input1,reminderInput2:reminders_input2,reminderInput3:reminders_input3,reminderInput4:reminders_input4,reminderInput5:reminders_input5,reminderInput6:reminders_input6},
+        cache:false,
+        success: function(result){
+        alert(result);
+          if(result=="Done"){
+            $state.go('myProfile');
+          }
+        }      
+      })
+    }
+
+
+  })
+    
 
 
 }])
+.controller('editNameCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+  $('#editName-button29').click(function(){
+    
+
+    
+    var status_editStatus_input1 = $('#editStatusInput1').val();
+    var status_editStatus_input2 = $('#editStatusInput2').val();
+    
+
+    
+    if(status_editStatus_input1 == '' || status_editStatus_input2 == ''){
+      alert('All fields are Required');
+
+    }
+    else{
+      $.ajax({
+        type: "POST",
+        url:"http://idonate.000webhostapp.com/server/editName.php",
+        data:{statusInput1:status_editStatus_input1,statusInput2:status_editStatus_input2},
+        cache:false,
+        success: function(result){
+        alert(result);
+          if(result=="Done"){ 
+            $state.go('update');
+          }
+
+        }
+      });
+    }
+
+    return false;
+
+  });
+
+
+}])
+.controller('editStatusCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+  $('#editStatus-button29').click(function(){
+    
+
+    
+    var status_editStatus_input1 = $('#editStatusInput1').val();
+    var status_editStatus_input2 = $('#editStatusInput2').val();
+    var status_editStatus_input3 = $('#editStatusInput3').val();
+
+
+    
+    if(status_editStatus_input1 == '' || status_editStatus_input2 == '' || status_editStatus_input3 == ''){
+      alert('All fields are Required');
+
+    }
+    else{
+      $.ajax({
+        type: "POST",
+        url:"http://idonate.000webhostapp.com/server/editStatus.php",
+        data:{statusInput1:status_editStatus_input1,statusInput2:status_editStatus_input2,statusInput3:status_editStatus_input3},
+        cache:false,
+        success: function(result){
+        alert(result);
+          if(result=="Done"){ 
+            $state.go('myProfile');
+          }
+
+        }
+      });
+    }
+
+    return false;
+
+  });
+
+}])
+
 
 .controller('statusCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+  $('#status_button16').click(function(){
+    
+
+    
+    var status_status_input1 = $('#statusInput1').val();
+    var status_status_input3 = $('#statusInput3').val();
+
+
+    
+    if(status_status_input1 == '' || status_status_input3 == ''){
+      alert('Date and Description are Required');
+
+    }
+    else{
+      $.ajax({
+        type: "POST",
+        url:"http://idonate.000webhostapp.com/server/status.php",
+        data:{statusInput1:status_status_input1,statusInput3:status_status_input3},
+        cache:false,
+        success: function(result){
+        alert(result);
+          if(result=="Done"){ 
+            $state.go('myProfile');
+          }
+
+        }
+      });
+    }
+
+    return false;
+
+  });
+
+
+}])
+   
+.controller('status2Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
@@ -783,6 +1006,22 @@ function ($scope, $stateParams) {
 }])
 
 .controller('editProfileCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+
+
+}])
+
+.controller('updateCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+
+
+}])
+
+.controller('updatepicCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
@@ -1454,7 +1693,7 @@ function ($scope, $stateParams,$http,$state, $ionicPopup,$cordovaSocialSharing, 
     $state.transitionTo($state.current, $stateParams, {reload: true, inherit: false});
     var No=$stateParams.term;
     $scope.user=$stateParams.user;
-    $scope.phone='+000,000,000';
+    $scope.phone='0715724717';
     
            
              $scope.getnum=function(){
@@ -1647,8 +1886,12 @@ function ($scope, $stateParams) {
         title: 'Reqired!',
         template: 'Please enter your credentials!'
     });
+    $scope.data.username = null;
+    $scope.data.mobilenumber = null;
   }else{
     SignInService.login($scope.data.username, $scope.data.mobilenumber).success(function(data) {
+        $scope.data.username = null;
+        $scope.data.mobilenumber = null;
         var user=data;
         $state.go('iDonate2', {user:user});
     }).error(function(data) {
@@ -1656,6 +1899,8 @@ function ($scope, $stateParams) {
             title: 'Login failed!',
             template: 'Please check your credentials!'
         });
+        $scope.data.username = null;
+        $scope.data.mobilenumber = null;
     });
   }
     }
@@ -1669,18 +1914,33 @@ function ($scope, $stateParams) {
         title: 'Reqired!',
         template: 'Please fill in all fields!'
     });
+    $scope.data.username = null;
+    $scope.data.mobilenumber = null;
+    $scope.data.firstname = null;
+    $scope.data.lastname = null;
+
   }else{
     SignUpService.register($scope.data.username, $scope.data.mobilenumber,$scope.data.firstname,$scope.data.lastname).success(function(data) {
         var alertPopup = $ionicPopup.alert({
             title: 'Registration Successful!',
             template: data
         });
+        $scope.data.username = null;
+        $scope.data.mobilenumber = null;
+        $scope.data.firstname = null;
+        $scope.data.lastname = null;
+
         $state.go('signin');
     }).error(function(data) {
         var alertPopup = $ionicPopup.alert({
             title: 'Registration Unsuccessful!',
             template: 'There is an account already registered with same credentials!'
         });
+        $scope.data.username = null;
+        $scope.data.mobilenumber = null;
+        $scope.data.firstname = null;
+        $scope.data.lastname = null;
+
     });
   }
     }

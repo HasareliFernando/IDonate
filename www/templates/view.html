@@ -6,50 +6,34 @@
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <div class="list card" id="view-card22">
-      <ion-item class="item-avatar" id="view-list-item8" style="">
-        <img src="img/7mOVXrrXT6mBVUcNCAPH_476.jpg">
-        <h2>2014/03/16 at UCSC</h2>
-      </ion-item>
-      <div class="item item-body" id="view-list-item-container4" style="">
-        <div id="view-markdown8" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">DOnated blood..</p>
-        </div>
-      </div>
-    </div>
-    <div class="list card" id="view-card26">
-      <ion-item class="item-avatar" id="view-list-item13" style="">
-        <img src="img/FBmCyUZjRWCR4k21tGap_475.jpg">
-        <h2>2014/08/06 at Kelaniya Temple</h2>
-      </ion-item>
-      <div class="item item-body" id="view-list-item-container8" style="">
-        <div id="view-markdown12" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">DOnated blood..</p>
-        </div>
-      </div>
-    </div>
-    <div class="list card" id="view-card27">
-      <ion-item class="item-avatar" id="view-list-item15" style="">
-        <img src="img/7mOVXrrXT6mBVUcNCAPH_476.jpg">
-        <h2>2014/03/16 at UOK</h2>
-        <ion-option-button class="button-positive"></ion-option-button>
-      </ion-item>
-      <div class="item item-body" id="view-list-item-container9" style="">
-        <div id="view-markdown13" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">DOnated blood..</p>
-        </div>
-      </div>
-    </div>
-    <div class="list card" id="view-card28">
-      <ion-item class="item-avatar" id="view-list-item16" style="">
-        <img src="img/7mOVXrrXT6mBVUcNCAPH_476.jpg">
-        <h2>2014/03/16 at UCSC</h2>
-      </ion-item>
-      <div class="item item-body" id="view-list-item-container10" style="">
-        <div id="view-markdown14" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">DOnated blood..</p>
-        </div>
-      </div>
-    </div>
+    <div class="spacer" style="width: 283px; height: 40px;"></div>
+    <form id="view_form" class="list" >
+      <ion-list id="view_list3">
+        <label class="item item-input">
+        <span class="input-label">Start Date</span>
+        <span id="view-input1"></span>
+        <input placeholder="" type="date" id="viewInput1">
+        </label>  
+
+        <label class="item item-input">
+        <span class="input-label">End Date</span>
+        <span id="view-input2"></span>
+        <input placeholder="" type="date" id="viewInput2">
+        </label>  
+      </ion-list>
+      <div class="spacer" style="width: 283px; height: 64px;"></div>
+      <button id="view_button16" class="button button-calm  button-block setrem">Submit</button>
+
+      <div class="spacer" style="width: 283px; height: 40px;"></div>
+      <table class="customers">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      
+    </table>
+    </form>
   </ion-content>
 </ion-view>

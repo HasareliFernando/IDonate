@@ -36,7 +36,10 @@ angular.module('app.routes', [])
     url: '/page6',
     templateUrl: 'templates/settings.html',
     controller: 'settingsCtrl',
-    reload: true
+    reload: true,
+     params: {
+        user: null
+    }
   })
 
   .state('timeline', {
@@ -129,36 +132,7 @@ angular.module('app.routes', [])
     }
   })
 
-      .state('myProfile', {
-    url: '/myProfile',
-    templateUrl: 'templates/myProfile.html',
-    controller: 'myProfileCtrl',
-    reload: true
-  })
-
-  .state('view', {
-    url: '/view',
-    templateUrl: 'templates/view.html',
-    controller: 'viewCtrl'
-  })
-
-  .state('reminders', {
-    url: '/reminders',
-    templateUrl: 'templates/reminders.html',
-    controller: 'remindersCtrl'
-  })
-
-  .state('status', {
-    url: '/status',
-    templateUrl: 'templates/status.html',
-    controller: 'statusCtrl'
-  })
-
-  .state('editProfile', {
-    url: '/editProfile',
-    templateUrl: 'templates/editProfile.html',
-    controller: 'editProfileCtrl'
-  })
+  
   .state('notification', {
     url: '/notification/:term',
     templateUrl: 'templates/notification.html',
@@ -224,9 +198,72 @@ angular.module('app.routes', [])
       controller: 'SignInCtrl'
       
   })
+      .state('myProfile', {
+    url: '/myProfile',
+    templateUrl: 'templates/myProfile.html',
+    controller: 'myProfileCtrl',
+    params: {
+        user: null
+    }
+  })
+
+  .state('view', {
+    url: '/view',
+    templateUrl: 'templates/view.html',
+    controller: 'viewCtrl'
+  })
+
+  .state('reminders', {
+    url: '/reminders',
+    templateUrl: 'templates/reminders.html',
+    controller: 'remindersCtrl'
+  })
+
+  .state('status', {
+    url: '/status',
+    templateUrl: 'templates/status.html',
+    controller: 'statusCtrl'
+  })
+
+  .state('status2', {
+    url: '/status2',
+    templateUrl: 'templates/status2.html',
+    controller: 'status2Ctrl'
+  })
+
+  .state('editProfile', {
+    url: '/editProfile',
+    templateUrl: 'templates/editProfile.html',
+    controller: 'editProfileCtrl'
+  })
+
+  .state('update', {
+    url: '/update',
+    templateUrl: 'templates/update.html',
+    controller: 'updateCtrl'
+  })
+
+  .state('updatepic', {
+    url: '/updatepic',
+    templateUrl: 'templates/updatepic.html',
+    controller: 'updatepicCtrl'
+  })
+
+  .state('editName', {
+    url: '/editName',
+    templateUrl: 'templates/editName.html',
+    controller: 'editNameCtrl'
+  })
+
+  .state('editStatus', {
+    url: '/editStatus',
+    templateUrl: 'templates/editStatus.html',
+    controller: 'editStatusCtrl'
+  })
 
 
-$urlRouterProvider.otherwise('/signin')
+
+$urlRouterProvider.otherwise('/page4')
 
 
 

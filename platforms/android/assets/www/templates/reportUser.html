@@ -1,20 +1,20 @@
 <ion-view title="Report User" id="page12" style="background-color: rgb(254, 253, 254);">
   <ion-nav-buttons side="right" class="has-header">
-    <button class="button button-icon icon ion-android-menu"></button>
+    
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <form id="reportUser-form14" class="list">
       <label class="item item-input reportID" id="reportUser-input26" name="Rpid">
-        <span class="input-label">User Id</span>
+        <span class="input-label">User Id: {{user}}</span>
         <input placeholder="" type="text">
       </label>
       <label class="item item-input reportUserID" id="reportUser-input27" name="Rprid">
         <span class="input-label">Reported User</span>
-        <input placeholder="User ID" type="text">
+        <input placeholder="User ID"  id="reportUser-input27" type="text">
       </label>
-      <ion-checkbox id="reportUser-checkbox9" name="Rcm1" class="reportfor1" style="">User posts miss behavioral posts </ion-checkbox>
-      <ion-checkbox id="reportUser-checkbox10" name="Rcm2" class="reportfor2" style="">Froud act of the user</ion-checkbox>
-      <ion-checkbox id="reportUser-checkbox14" name="Rcm3" class="reportfor3" style="">Other</ion-checkbox>
+      <ion-checkbox id="reportUser-checkbox9" name="Rcm1" class="reportfor1" style="" value="User posts miss behavioral posts">User posts miss behavioral posts </ion-checkbox>
+      <ion-checkbox id="reportUser-checkbox10" name="Rcm2" class="reportfor2" style="" value="Froud act of the user">Froud act of the user</ion-checkbox>
+      <ion-checkbox id="reportUser-checkbox14" name="Rcm3" class="reportfor3" style="" value="Other">Other</ion-checkbox>
     </form>
     <button id="reportUser-button19" class="button button-assertive button-block report">Report</button>
   </ion-content>

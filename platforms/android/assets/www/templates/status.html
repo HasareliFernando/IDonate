@@ -1,19 +1,22 @@
 <ion-view title="Status" id="status" style="">
-  <ion-content padding="true" class="has-header">
+  <ion-content padding="true" class="has-header" ng-controller="statusCtrl">
     <div class="spacer" style="width: 283px; height: 40px;"></div>
-    <form id="status-form3" class="list">
-      <ion-list id="status-list3">
-        <label class="item item-select" id="status-select1">
-          <span class="input-label">* Select </span>
-          <select>
-            <option>Healthy</option>
-            <option>Unavailabale</option>
-            <option>Unhealthy</option>
-          </select>
-        </label>
+    <form id="status_form3" class="list" >
+      <ion-list id="status_list3">
+        <label class="item item-input">
+        <span class="input-label">Date</span>
+        <span id="status-input1"></span>
+        <input placeholder="" type="date" id="statusInput1">
+        </label>  
+
+        <label class="item item-input">
+        <span class="input-label">Description</span>
+        <span id="status_input3"></span>
+        <input placeholder="" type="text" id="statusInput3">
+        </label>   
       </ion-list>
       <div class="spacer" style="width: 283px; height: 64px;"></div>
-      <button id="status-button16" class="button button-calm  button-block setrem">Post</button>
+      <button id="status_button16" class="button button-calm  button-block setrem">Post</button>
     </form>
   </ion-content>
 </ion-view>

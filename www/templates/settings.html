@@ -3,14 +3,16 @@
     
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <ion-list id="settings-list5">
+    <ion-list id="settings-list5" ng-repeat="it in item.info">
       <ion-item class="item-thumbnail-left  setting" id="settings-list-item12" style="">
-        <h2>Name</h2>
-        <p>Contact</p>
+      <img src="img/donate.png">
+      <h1>IDonate</h1>
+        <p>{{it.fname}}  {{it.lname}}</p>
+        <p>{{it.phone}}</p>
       </ion-item>
     </ion-list>
-    <button id="settings-button41" class="button button-assertive  button-block icon-left ion-ios-help-outline faq">Remove Account</button>
-    <button id="settings-button40" class="button button-assertive button-block icon-left ion-ios-help-outline faq">FAQ</button>
+    <button id="settings-button41" class="button button-assertive  button-block icon-left ion-trash-b faq" ng-click=remove()>Remove your Donor Account</button>
+    <button id="settings-button40" class="button button-assertive button-block icon-left ion-power"  ng-click=logout()>LogOut</button>
     
   </ion-content>
 </ion-view>

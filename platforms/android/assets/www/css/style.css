@@ -78,3 +78,40 @@ color : green;
 .round-button-circle:hover {
   background:#30588e;
 }
+
+.img{
+
+position: fixed;
+bottom: 0px;
+height: 48px;
+width: 48px;
+right:0px;
+
+  
+}
+.text{
+position: fixed;
+bottom: 0px;
+font-size: 2em;
+
+}
+.img2{
+
+
+height: 150px;
+width: 150px;
+position: fixed;
+  top: 50%;
+  left: 80%;
+  margin-top: -50px;
+  margin-left: -150px;
+  
+}
+.t{
+  margin-top: 110px;
+  margin-left: 30px;
+  font-family: "Comic Sans MS", cursive, sans-serif,bold;
+  font-size:60px;
+  color:#F71515;
+ 
+}

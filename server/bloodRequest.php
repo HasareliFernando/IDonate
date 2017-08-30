@@ -25,7 +25,7 @@
 		}
 
 		for($c=5;$c<21;$c++){
-			$sms= "SELECT * , (3956 * 2 * ASIN(SQRT( POWER(SIN(('$input3' - latitude) *  pi()/180 / 2), 2) +COS( '$input3' * pi()/180) * COS(latitude * pi()/180) * POWER(SIN(( '$input4' - longitude) * pi()/180 / 2), 2) ))) as distance  from donor  having  distance <= $c and blood_group='$input1' and eligibleStatus=TRUE and user_id!='$user' order by distance";
+			$sms= "SELECT * , (3956 * 2 * ASIN(SQRT( POWER(SIN(('$input3' - latitude) *  pi()/180 / 2), 2) +COS( '$input3' * pi()/180) * COS(latitude * pi()/180) * POWER(SIN(( '$input4' - longitude) * pi()/180 / 2), 2) ))) as distance  from donor  having  distance <= $c and blood_group='$input1' and eligibleStatus=TRUE and user_id!='$user' order by distance , rate DESC";
 			$query=$conn->query($sms);
 			if($query->num_rows >0){
 				while($row =$query->fetch_array()){
@@ -47,7 +47,7 @@
 			}
 		}foreach ($donor_array as $value) {
 			
-			$req="INSERT INTO notification(req_id,user_id, requester_id, blood_group, latitude, longtitute, date, time, approve) VALUES ('$reqid','$value','donor1','$input1','$input3','$input4','$date','$time',0)";
+			$req="INSERT INTO notification(req_id,user_id, requester_id, blood_group, latitude, longtitute, date, time, approve) VALUES ('$reqid','$value','$user','$input1','$input3','$input4','$date','$time',0)";
 			if($conn->query($req)===TRUE){
 				
 				$num=$num+1;

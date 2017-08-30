@@ -1,19 +1,39 @@
-<ion-view title="Reminders" id="reminders" style="">
-  <ion-content padding="true" class="has-header">
-    <form id="reminders-form2" class="list">
-      <ion-list id="reminders-list2">
-        <label class="item item-input" id="reminders-input1">
-          <span class="input-label">Date</span>
-          <input placeholder="" type="date">
+<ion-view title="reminders" id="reminders" style="">
+<ion-nav-buttons side="right" class="has-header">
+    <button class="button button-icon icon ion-android-menu"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header" ng-controller="remindersCtrl">
+    <form id="update-form2" class="list">
+      <ion-list id="update-list2">
+        <label class="item item-input item-stacked-label" id="reminders-input5">
+        <span class="input-label">Reminder Id</span>
+        <input placeholder="" type="text" id="reminder_input1">
         </label>
-        <label class="item item-input" id="reminders-input2">
-          <span class="input-label">Time</span>
-          <input placeholder="" type="time">
+        <label class="item item-input" id="update-input1">
+          <span class="input-label">Last Donated Date</span>
+          <input placeholder="" type="date" id="reminder_input2">
+        </label>
+        <label class="item item-input" id="update-input2">
+          <span class="input-label">Next Eligible Date</span>
+          <input placeholder="" type="date" id="reminder_input3">
+        </label>
+        <label class="item item-select remindertype" id="bloodRequest-select3" name="Dtype1">
+        <span class="input-label">Blood Type</span>
+        <select id="reminder_select">
+          <option>Blood(whole blood)</option>
+          <option>Platelets</option>
+          <option>Plasma</option>
+          <option>Power Red</option>
+        </select>
         </label>
       </ion-list>
       <label class="item item-input item-stacked-label" id="reminders-input4">
-        <span class="input-label">Note</span>
-        <input placeholder="" type="text">
+        <span class="input-label">Diseases</span>
+        <input placeholder="" type="text" id="reminder_input4">
+      </label>
+      <label class="item item-input item-stacked-label" id="reminders-input6">
+        <span class="input-label">Donor Id</span>
+        <input placeholder="" type="text" id="reminder_input5">
       </label>
       <div class="spacer" style="height: 100px;"></div>
       <button id="reminders-button14" class="button button-calm  button-block setrem">Set reminder</button>

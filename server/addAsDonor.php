@@ -14,7 +14,7 @@
 		}
 	}
 	
-	$sql="INSERT INTO donor VALUES('$user','$tele','$input1','$input2','$input3','$input4','$input5',null,null,1)";
+	$sql="INSERT INTO donor VALUES('$user','$tele','$input1','$input2','$input3','$input4','$input5',null,null,1,10)";
 	if($conn->query($sql)===TRUE){
 		echo 'Next';
 	}

@@ -1,32 +1,88 @@
-<ion-view title="My Profile" id="myProfile" style="background-color: rgb(255, 255, 255);" class="side-menu-gradient">
-  <ion-nav-buttons side="left" class="has-header">
-    <button class="button button-icon icon ion-chevron-left"></button>
-  </ion-nav-buttons>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link href="http://code.ionicframework.com/1.0.1/css/ionic.min.css" rel="stylesheet">
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+
+  <script src="http://code.ionicframework.com/1.0.1/js/ionic.bundle.min.js"></script>
+  <script src="ionic-ratings.js"></script>
+  <script src="script.js"></script>
+</head>
+<ion-view title="My Profile" id="myProfile" style="background-color: rgb(255, 255, 255);" >
   <ion-nav-buttons side="right" class="has-header">
     <button class="button button-icon icon ion-android-menu"></button>
   </ion-nav-buttons>
+
+  <ion-nav-buttons side="right" class="has-header">
+    <button class="button button-icon icon ion-android-menu"></button>
+  </ion-nav-buttons>
+
   <ion-content padding="true" class="has-header">
-    <div class="circular-landscape">
-      <img src="img/onXgz0wQQmxKtCGeGlCE_474.jpg" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
+
+    <div >
+      <img src="img/onXgz0wQQmxKtCGeGlCE_474.jpg" style="display: block; margin-left: auto; margin-right: auto;vertical-align: middle;border-radius: 50%; position: relative;width:200px;height: 1s6px;">
     </div>
-    <div id="myProfile-markdown4" class="show-list-numbers-and-dots">
-      <p style="color:#000000;font-size:25px;">Group Project</p>
-    </div>
-    <div class="star">
-      <img src="img/jYilaBxQlutT5YV8fLQX_five-stars.png" style="display:block;width:100%;height:auto;">
-    </div>
+
     <div class="spacer" style="width: 283px; height: 14px;"></div>
+
+    <div id="myProfile-markdown4" class="show-list-numbers-and-dots">
+      <p style="color:#000000;font-size:25px;">Group Project(GP6359)</p>
+    </div>
+
+    <div class="spacer" style="width: 283px; height: 11px;"></div>
+
+    <div id="myProfile-markdown6" class="show-list-numbers-and-dots">
+      <p style="color:#000000;font-size:20px;">Phone number: +94 715699643</p>
+    </div>
+
+    <div class="spacer" style="width: 283px; height: 11px;"></div>
+
     <div id="myProfile-markdown5" class="show-list-numbers-and-dots">
       <p style="color:#000000;">This is your user ID. This ID will be visible to all other users of this app.</p>
     </div>
+
+
+
     <div class="spacer" style="width: 283px; height: 11px;"></div>
-    <div id="myProfile-markdown6" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Phone number: +94 715699643</p>
+    <div class="spacer" style="width: 283px; height: 11px;"></div>
+
+
+    <div class="spacer" style="width: 283px; height: 14px;"></div>
+
+    
+
+    <div class="spacer" style="width: 283px; height: 11px;"></div>
+    
+    <star-rating-comp direction="'ltr'"></star-rating-comp>
+
+
+    
+    <div class="row"> 
+      <div class="col s6">
+      
+        <a ui-sref="status2" id="myProfile-button11" class="button button-assertive button-small button-block icon ion-android-textsms " >   status</a>
+       
+      </div>
+      <div class="col s6">
+      
+        <a ui-sref="reminders" id="myProfile-button12" class="button button-assertive button-small button-block  icon ion-android-stopwatch " > reminders</a>
+      
+      </div>     
     </div>
-    <button id="myProfile-button9" style="border-radius:5px 5px 5px 5px;" class="button button-assertivebutton-small button-block button-clear icon ion-android-sync inner"> update</button>
-    <a ui-sref="editProfile" id="myProfile-button8" class="button button-assertivebutton-small button-block button-clear icon ion-android-create inner"> edit</a>
-    <a ui-sref="status" id="myProfile-button11" class="button button-assertivebutton-small button-block button-clear icon ion-android-textsms inner"> status</a>
-    <a ui-sref="reminders" id="myProfile-button12" class="button button-assertivebutton-small button-block button-clear icon ion-android-stopwatch inner"> reminders</a>
-    <a ui-sref="view" id="myProfile-button13" class="button button-assertivebutton-small button-block button-clear icon ion-connection-bars but"> view</a>
+    <div class="row"> 
+      <div class="col s6">
+      
+        <a ui-sref="view" id="myProfile-button13" class="button button-assertive button-small button-block icon ion-connection-bars ">   view</a>
+      
+      </div>
+      <div class="col s6">
+      
+        <a ui-sref="update" id="myProfile-button12" class="button button-assertive button-small button-block  icon ion-android-stopwatch " >  update</a>
+      
+      </div>     
+    </div>
+    
+
+
+    
   </ion-content>
 </ion-view>
